@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -33,7 +34,12 @@ export default function Home() {
 
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-16 text-black"> Go to API </div>
+        <Link
+          href="/api"
+          className="flex flex-col items-center justify-center gap-16 bg-orange-200 text-black rounded-2xl p-2 hover:text-gray-600"
+        >
+          Go to API
+        </Link>
     </div>
   );
 }
