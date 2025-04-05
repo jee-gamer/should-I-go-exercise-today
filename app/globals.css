@@ -12,3 +12,11 @@
   font-family: sans-serif;
   line-height: 24px;
 }
+
+.attribute-box {
+  @apply flex flex-col items-center justify-center gap-5 border-5 rounded-2xl min-w-[400px] p-7
+}
+
+.attribute-title {
+  @apply font-bold text-5xl;
+}
