@@ -4,6 +4,7 @@ import '@/app/globals.css'
 import localFont from 'next/font/local'
 
 const CaveatBrush_font = localFont({src: './fonts/CaveatBrush-Regular.ttf'})
+const PM_font = localFont({src: './fonts/PermanentMarker-Regular.ttf'})
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
         <div id="main" className="flex flex-row items-center justify-center gap-16 mt-20">
 
             <div id="recommendation" className="flex flex-col items-center justify-center gap-16 m-30 text-black">
-                <div id="yesno" className="flex flex-col items-center justify-center gap-16 text-8xl">
+                <div id="yesno" className={`flex flex-col items-center justify-center gap-16 text-9xl ${PM_font.className}`}>
                     YES
                 </div>
                 <div id="general" className="flex flex-col items-center justify-center gap-16 max-w-100">
@@ -27,11 +28,11 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="flex flex-col items-center justify-center gap-16 m-30 text-black">
+            <div className="relative flex flex-col items-center justify-center gap-16 text-black">
                 <Image
-                    src="/vercel.svg"
-                    width={500}
-                    height={500}
+                    src="/pinNote2.png"
+                    width={600}
+                    height={600}
                     alt="Picture of the author"
                 />
             </div>
