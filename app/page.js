@@ -35,6 +35,13 @@ export default function Home() {
                     height={600}
                     alt="Picture of the author"
                 />
+                <Image
+                    src="/flowerTest.png"
+                    width={500}
+                    height={500}
+                    alt="Picture of the author"
+                    className="absolute top-18 left-13"
+                />
             </div>
 
         </div>
