@@ -47,7 +47,23 @@ export default function Home() {
 
 			</div>
 
-			<div id="attributes" className="flex flex-row items-center justify-center min-w-full min-h-1/4 gap-16 mt-20 border">
+			<Link
+				href="/api"
+				className={`relative flex flex-col items-center justify-center min-w-1/6 gap-16 mt-10 text-5xl text-black rounded-2xl p-2 hover:text-gray-600 ${ PM_font.className }`}
+			>
+				Go to API
+				<Image
+					src="/drawnCircle.png"
+					width={ 500 }
+					height={ 100 }
+					alt="Drawn Circle"
+					className="absolute -top-15 -left-5"
+				/>
+			</Link>
+
+
+
+			<div id="attributes" className="flex flex-row items-center justify-center min-w-full min-h-1/4 gap-[5vw] mt-30 border">
 				<div id="temperature" className="attribute-box">
 					<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
 					<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
@@ -66,12 +82,6 @@ export default function Home() {
 				</div>
 			</div>
 
-			<Link
-				href="/api"
-				className="flex flex-col items-center justify-center gap-16 bg-orange-200 text-black rounded-2xl p-2 hover:text-gray-600"
-			>
-				Go to API
-			</Link>
     </div>
   );
 }
