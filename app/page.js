@@ -5,6 +5,7 @@ import localFont from 'next/font/local'
 
 const CaveatBrush_font = localFont({src: './fonts/CaveatBrush-Regular.ttf'})
 const PM_font = localFont({src: './fonts/PermanentMarker-Regular.ttf'})
+const WinkySans_font = localFont({src: './fonts/WinkySans-VariableFont_wght.ttf'})
 
 export default function Home() {
   return (
@@ -14,17 +15,15 @@ export default function Home() {
 
         <div id="main" className="flex flex-row items-center justify-center gap-16 mt-20">
 
-            <div id="recommendation" className="flex flex-col items-center justify-center gap-16 m-30 text-black">
-                <div id="yesno" className={`flex flex-col items-center justify-center gap-16 text-9xl ${PM_font.className}`}>
+            <div id="recommendation" className="flex flex-col items-center justify-items-start gap-16 m-30 min-w-[400px] min-h-[500px] max-h-[500px] text-black">
+                <div id="yesno" className={`flex flex-col gap-16 text-9xl mt-10 ${PM_font.className}`}>
                     YES
                 </div>
-                <div id="general" className="flex flex-col items-center justify-center gap-16 max-w-100">
-                    Scenario: It’s a breezy, slightly overcast afternoon with a cool temperature.
-
-                    Why you should exercise: The mild weather means you won’t overheat, and the breeze keeps you feeling fresh.
-                    Overcast skies reduce glare and make outdoor workouts more comfortable.
-                    Plus, the air feels crisp and energizing, making it the perfect time for a run, a long walk,
-                    or even some bodyweight exercises at the park. You’ll feel refreshed and accomplished without battling extreme weather conditions.
+                <div id="general" className={`flex flex-col items-center justify-center gap-16 max-w-100 text-3xl ${WinkySans_font.className}`}>
+                    The mild weather means you won’t overheat, and the breeze keeps you feeling fresh.
+                    <br/>
+                    <br/>
+                    It’s a breezy, slightly overcast afternoon with a cool temperature.
                 </div>
             </div>
 
