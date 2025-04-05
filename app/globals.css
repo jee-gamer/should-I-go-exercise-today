@@ -7,7 +7,7 @@
   background:
     linear-gradient(to bottom, #ddd 1px, transparent 1px),
     linear-gradient(to right, #eee 1px, transparent 1px),
-    #fef7cb; /* Tailwind's bg-amber-50 */
+    var(--color-amber-50);
   background-size: 100% 40px, 40px 100%; /* horizontal line every 24px, vertical line every 32px */
   font-family: sans-serif;
   line-height: 24px;
