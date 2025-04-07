@@ -20,3 +20,7 @@
 .attribute-title {
   @apply font-bold text-5xl;
 }
+
+.normal-flex {
+  @apply flex flex-col items-center justify-center
+}

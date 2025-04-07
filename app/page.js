@@ -63,23 +63,39 @@ export default function Home() {
 
 
 
-			<div id="attributes" className="flex flex-row items-center justify-center min-w-full min-h-1/4 gap-[5vw] mt-30 border">
-				<div id="temperature" className="attribute-box">
-					<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-					<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+			<div id="attributes" className="flex flex-row items-center justify-center min-w-full min-h-1/4 gap-[5vw] mt-30 mb-30 border">
+				<div className="normal-flex">
+					<div id="temperature" className="attribute-box">
+						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
+						<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+					</div>
+					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
-				<div id="humidity" className="attribute-box">
-					<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-					<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+
+				<div className="normal-flex">
+					<div id="humidity" className="attribute-box">
+						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
+						<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+					</div>
+					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
-				<div id=" pm2.5" className="attribute-box">
-					<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-					<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+
+				<div className="normal-flex">
+					<div id="pm2.5" className="attribute-box">
+						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
+						<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+					</div>
+					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
-				<div id="people" className="attribute-box">
-					<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-					<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+
+				<div className="normal-flex">
+					<div id="people" className="attribute-box">
+						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
+						<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+					</div>
+					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
+
 			</div>
 
     </div>
