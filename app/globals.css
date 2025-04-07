@@ -24,3 +24,7 @@
 .normal-flex {
   @apply flex flex-col items-center justify-center
 }
+
+.api-box {
+  @apply flex flex-row justify-center border-4 rounded-2xl w-full p-10
+}
