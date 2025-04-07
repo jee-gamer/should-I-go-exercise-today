@@ -6,11 +6,18 @@ import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-items-center min-h-fit sm:p-20 font-[family-name:var(--font-geist-sans)] notebook">
-      <div className={`flex flex-col items-center justify-center gap-16 mt-40 text-8xl text-black border ${CaveatBrush_font.className}`}> Should I go exercise right now?
+    <div className="relative flex flex-col items-center justify-items-center min-h-fit min-w-fit sm:p-20 font-[family-name:var(--font-geist-sans)] notebook overflow-hidden">
+			<Image
+				src="/dumbbell1.png"
+				width={ 900 }
+				height={ 900 }
+				alt="Picture of the author"
+				className="absolute rotate-60 transform translate-x-270 -translate-y-30"
+			/>
+      <div className={`flex flex-col items-center justify-center gap-16 mt-40 text-8xl text-black ${CaveatBrush_font.className}`}> Should I go exercise right now?
       </div>
 
-			<div id="main" className="flex flex-row items-center justify-center gap-16 border">
+			<div id="main" className="flex flex-row items-center justify-center gap-16">
 
 				<div id="recommendation"
 						 className="flex flex-col items-center justify-items-start gap-16 m-30 min-w-[400px] min-h-[500px] max-h-[500px] text-black">
