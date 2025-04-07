@@ -26,6 +26,7 @@ export default function RootLayout({ children }) {
       <nav className="bg-orange-200 text-black p-4 flex space-x-5">
         <Link href="/" className="hover:text-gray-600">Home</Link>
         <Link href="/api" className="hover:text-gray-600">API</Link>
+        <Link href="/visualization" className="hover:text-gray-600">Visualization</Link>
       </nav>
         {children}
       </body>
