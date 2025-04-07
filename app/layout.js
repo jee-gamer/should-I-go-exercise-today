@@ -21,9 +21,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <nav className="bg-orange-200 text-black p-4 flex space-x-5">
+      <nav className="sticky flex top-0 z-50 bg-orange-200 text-black p-4 space-x-5 w-full">
         <Link href="/" className="hover:text-gray-600">Home</Link>
         <Link href="/api" className="hover:text-gray-600">API</Link>
         <Link href="/visualization" className="hover:text-gray-600">Visualization</Link>

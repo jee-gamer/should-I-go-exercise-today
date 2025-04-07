@@ -6,13 +6,20 @@ import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 
 export default function Home() {
   return (
-    <div className="relative flex flex-col items-center justify-items-center min-h-fit min-w-fit sm:p-20 font-[family-name:var(--font-geist-sans)] notebook overflow-hidden">
+    <div className="relative flex flex-col items-center justify-items	-center min-h-fit max-w-screen sm:p-20 font-[family-name:var(--font-geist-sans)] notebook overflow-x-hidden">
 			<Image
 				src="/dumbbell1.png"
 				width={ 900 }
 				height={ 900 }
-				alt="Picture of the author"
+				alt="Dumbbell"
 				className="absolute rotate-60 transform translate-x-270 -translate-y-30"
+			/>
+			<Image
+				src="/woodSign1.webp"
+				width={ 500 }
+				height={ 500 }
+				alt="Wood Sign"
+				className="absolute transform -translate-x-240 translate-y-120 rotate-15"
 			/>
       <div className={`flex flex-col items-center justify-center gap-16 mt-40 text-8xl text-black ${CaveatBrush_font.className}`}> Should I go exercise right now?
       </div>
@@ -56,7 +63,7 @@ export default function Home() {
 
 			<Link
 				href="/api"
-				className={`relative flex flex-col items-center justify-center min-w-1/6 gap-16 mt-10 text-5xl text-black rounded-2xl p-2 hover:text-gray-600 ${ PM_font.className }`}
+				className={`relative flex flex-col items-center justify-center min-w-100 max-w-200 gap-16 mt-10 text-5xl text-black rounded-2xl p-2 hover:text-gray-600 ${ PM_font.className }`}
 			>
 				Go to API
 				<Image
@@ -64,7 +71,7 @@ export default function Home() {
 					width={ 500 }
 					height={ 100 }
 					alt="Drawn Circle"
-					className="absolute -top-15 -left-5"
+					className="absolute -top-15 -left-5 min-w-100"
 				/>
 			</Link>
 
