@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
         width={ 100 }
         height={ 100 }
         alt="Icon"
-        className="absolute transform -translate-x-38 -translate-y-1"
+        className="absolute transform -translate-x-38 -translate-y-0"
       />
 
       <Link href="/" className="hover:text-gray-600 group">Home
