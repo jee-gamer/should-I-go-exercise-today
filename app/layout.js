@@ -2,6 +2,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 
+import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
+import Image from "next/image";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,11 +27,42 @@ export default function RootLayout({ children }) {
       className={ `${ geistSans.variable } ${ geistMono.variable } antialiased` }
     >
     <nav
-      className="sticky flex top-0 z-50 bg-orange-200 text-black p-4 space-x-5 w-full">
-      <Link href="/" className="hover:text-gray-600">Home</Link>
-      <Link href="/api" className="hover:text-gray-600">API</Link>
-      <Link href="/visualization"
-            className="hover:text-gray-600">Visualization</Link>
+      className={ `sticky flex flex-row items-center top-0 z-50 bg-orange-200 text-black h-22 text-4xl gap-16 p-4 pl-50 space-x-5 w-full ${ CaveatBrush_font.className }` }>
+      <Image
+        src="/dumbbell3.webp"
+        width={ 100 }
+        height={ 100 }
+        alt="Icon"
+        className="absolute transform -translate-x-38 -translate-y-1"
+      />
+
+      <Link href="/" className="hover:text-gray-600 group">Home
+        <Image src="/drawnCircle2.png"
+               width={ 120 }
+               height={ 120 }
+               alt="Image"
+               className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-y-12 -translate-x-6 -z-1"
+        />
+      </Link>
+
+      <Link href="/api" className="hover:text-gray-600 group">API
+        <Image src="/drawnCircle2.png"
+               width={ 120 }
+               height={ 120 }
+               alt="Image"
+               className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-y-12 -translate-x-8 -z-1"
+        />
+      </Link>
+
+      <Link href="/visualization" className="hover:text-gray-600 group">Visual
+        <Image src="/drawnCircle2.png"
+               width={ 120 }
+               height={ 120 }
+               alt="Image"
+               className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform -translate-y-12 -translate-x-5 -z-1"
+        />
+      </Link>
+
     </nav>
     { children }
     </body>

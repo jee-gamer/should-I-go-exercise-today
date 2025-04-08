@@ -31,7 +31,7 @@ export default function Home() {
       <div className={`flex flex-col items-center justify-center gap-16 mt-40 text-8xl text-black text-outline ${CaveatBrush_font.className}`}> Should I go exercise right now?
       </div>
 
-			<div id="main" className="flex flex-row items-center justify-center gap-16 border min-w-[1304px]">
+			<div id="main" className="flex flex-row items-center justify-center gap-16 min-w-[1304px]">
 
 				<div id="recommendation"
 						 className="flex flex-col items-center justify-items-start gap-16 m-30 min-w-[400px] min-h-[500px] max-h-[500px] text-black">
