@@ -13,12 +13,21 @@
   line-height: 24px;
 }
 
+.gradient {
+  @apply absolute inset-0 opacity-20 -z-1;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 255, 0.5) 100%);
+}
+
 .attribute-box {
-  @apply flex flex-col items-center justify-center gap-5 border-5 rounded-2xl min-w-[400px] p-7
+  @apply flex flex-col items-center justify-center gap-5 border-5 rounded-2xl w-fit p-7
 }
 
 .attribute-title {
   @apply font-bold text-5xl;
+}
+
+.attribute-text {
+  @apply text-5xl xl:text-9xl;
 }
 
 .normal-flex {
@@ -27,4 +36,24 @@
 
 .api-box {
   @apply flex flex-row justify-center border-4 rounded-2xl w-full p-10
+}
+
+.text-outline {
+  text-shadow:
+    /* Inner ring */
+  -5px -5px 0px #fff, 0px -5px 0 #fff, 5px -5px 0 #fff,
+  -5px  0 0 #fff, 5px  0px 0 #fff,
+  -5px  5px 0 #fff, 0px  5px 0 #fff, 5px  5px 0 #fff,
+
+    /* Middle ring */
+  -6px -6px 0 #fff, 6px -6px 0 #fff,
+  -6px  6px 0 #fff, 6px  6px 0 #fff,
+  -7px  0px 0 #fff, 7px  0px 0 #fff,
+  0px -7px 0 #fff, 0px  7px 0 #fff,
+
+    /* Outer ring */
+  -8px -8px 0 #fff, 8px -8px 0 #fff,
+  -8px  8px 0 #fff, 8px  8px 0 #fff,
+  -9px  0px 0 #fff, 9px  0px 0 #fff,
+  0px -9px 0 #fff, 0px  9px 0 #fff;
 }

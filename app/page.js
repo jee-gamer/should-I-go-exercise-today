@@ -6,30 +6,37 @@ import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 
 export default function Home() {
   return (
-    <div className="relative flex flex-col items-center justify-items	-center min-h-fit max-w-screen sm:p-20 font-[family-name:var(--font-geist-sans)] notebook overflow-x-hidden">
+    <div className="relative flex flex-col items-center justify-items	-center min-h-fit w-full max-w-screen sm:p-20 font-[family-name:var(--font-geist-sans)] notebook overflow-x-hidden z-0">
 			<Image
-				src="/dumbbell1.png"
+				src="/dumbbell2Outline.png"
 				width={ 900 }
 				height={ 900 }
 				alt="Dumbbell"
-				className="absolute rotate-60 transform translate-x-270 -translate-y-30"
+				className="absolute rotate-60 transform translate-x-260 translate-y-50"
 			/>
 			<Image
-				src="/woodSign1.webp"
-				width={ 500 }
-				height={ 500 }
+				src="/pencil2.png"
+				width={ 700 }
+				height={ 700 }
 				alt="Wood Sign"
-				className="absolute transform -translate-x-240 translate-y-120 rotate-15"
+				className="absolute transform -translate-x-220 translate-y-90 -rotate-80"
 			/>
-      <div className={`flex flex-col items-center justify-center gap-16 mt-40 text-8xl text-black ${CaveatBrush_font.className}`}> Should I go exercise right now?
+			<Image
+				src="/eraser1.png"
+				width={ 300 }
+				height={ 300 }
+				alt="Wood Sign"
+				className="absolute transform -translate-x-210 translate-y-220"
+			/>
+      <div className={`flex flex-col items-center justify-center gap-16 mt-40 text-8xl text-black text-outline ${CaveatBrush_font.className}`}> Should I go exercise right now?
       </div>
 
-			<div id="main" className="flex flex-row items-center justify-center gap-16">
+			<div id="main" className="flex flex-row items-center justify-center gap-16 border min-w-[1304px]">
 
 				<div id="recommendation"
 						 className="flex flex-col items-center justify-items-start gap-16 m-30 min-w-[400px] min-h-[500px] max-h-[500px] text-black">
 					<div id="yesno"
-							 className={ `flex flex-col gap-16 text-9xl mt-10 ${ PM_font.className }` }>
+							 className={ `flex flex-col gap-16 text-9xl mt-10 text-outline ${ PM_font.className }` }>
 						YES
 					</div>
 					<div id="general"
@@ -54,7 +61,7 @@ export default function Home() {
 						src="/flowerTest.png"
 						width={ 500 }
 						height={ 500 }
-						alt="Picture of the author"
+						alt="Stickman"
 						className="absolute top-18 left-13"
 					/>
 				</div>
@@ -63,7 +70,7 @@ export default function Home() {
 
 			<Link
 				href="/api"
-				className={`relative flex flex-col items-center justify-center min-w-100 max-w-200 gap-16 mt-10 text-5xl text-black rounded-2xl p-2 hover:text-gray-600 ${ PM_font.className }`}
+				className={`relative flex flex-col items-center justify-center min-w-100 max-w-200 gap-16 mt-10 text-5xl text-black rounded-2xl p-2 hover:text-gray-600 hover:opacity-70 ${ PM_font.className }`}
 			>
 				Go to API
 				<Image
@@ -81,7 +88,7 @@ export default function Home() {
 				<div className="normal-flex">
 					<div id="temperature" className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-						<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+						<span className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
 					</div>
 					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
@@ -89,7 +96,7 @@ export default function Home() {
 				<div className="normal-flex">
 					<div id="humidity" className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-						<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+						<span className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
 					</div>
 					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
@@ -97,7 +104,7 @@ export default function Home() {
 				<div className="normal-flex">
 					<div id="pm2.5" className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-						<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+						<span className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
 					</div>
 					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
@@ -105,13 +112,13 @@ export default function Home() {
 				<div className="normal-flex">
 					<div id="people" className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-						<span className={`${ WinkySans_font.className } text-9xl`}>21 °C</span>
+						<span className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
 					</div>
 					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
 
 			</div>
 
-    </div>
+		</div>
   );
 }
