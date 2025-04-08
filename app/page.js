@@ -1,10 +1,24 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import '@/app/globals.css'
 
 import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 
+import { useEffect, useState } from "react";
+
 export default function Home() {
+	const [temp, setTemp] = useState(31); // temp here
+	const [tempColor, setTempColor] = useState("");
+
+	useEffect(() => {
+		if (temp <= 26) setTempColor("text-blue-500");
+		else if (temp <= 30) setTempColor("text-yellow-500");
+		else if (temp <= 35) setTempColor("text-orange-500");
+		else setTempColor("text-red-800");
+	}, [temp])
+
   return (
     <div className="relative flex flex-col items-center justify-items	-center min-h-fit w-full max-w-screen sm:p-20 font-[family-name:var(--font-geist-sans)] notebook overflow-x-hidden z-0">
 			<Image
@@ -84,27 +98,30 @@ export default function Home() {
 
 
 
-			<div id="attributes" className="flex flex-row items-center justify-center min-w-full min-h-1/4 gap-[5vw] mt-30 mb-30 border">
+			<div id="attributes" className="flex f	lex-row items-center justify-center min-w-full min-h-1/4 gap-[5vw] mt-30 mb-30 border">
 				<div className="normal-flex">
-					<div id="temperature" className="attribute-box">
+					<div className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-						<span className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
+						<div className="flex flex-row items-end">
+							<span id="temperature" className={`${ WinkySans_font.className } ${tempColor} attribute-text`}>{ temp }</span>
+							<span id="temperature" className={`${ WinkySans_font.className } ${tempColor} text-2xl xl:text-5xl mb-4`}>°C</span>
+						</div>
 					</div>
 					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
 
 				<div className="normal-flex">
-					<div id="humidity" className="attribute-box">
+					<div className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-						<span className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
+						<span id="humidity" className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
 					</div>
 					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
 
 				<div className="normal-flex">
-					<div id="pm2.5" className="attribute-box">
+					<div className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-						<span className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
+						<span id="pm2.5" className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
 					</div>
 					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
@@ -112,7 +129,7 @@ export default function Home() {
 				<div className="normal-flex">
 					<div id="people" className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title border`}>🌡️ Temperature</span>
-						<span className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
+						<span id="people" className={`${ WinkySans_font.className } attribute-text`}>21 °C</span>
 					</div>
 					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
