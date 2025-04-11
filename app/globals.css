@@ -19,7 +19,7 @@
 }
 
 .attribute-box {
-  @apply flex flex-col items-center justify-center gap-5 border-5 rounded-2xl w-fit p-7
+  @apply flex flex-col items-center justify-center gap-5 border-5 rounded-2xl w-full p-7
 }
 
 .attribute-title {
@@ -31,7 +31,7 @@
 }
 
 .normal-flex {
-  @apply flex flex-col items-center justify-center
+  @apply flex flex-col items-center justify-center w-1/6
 }
 
 .api-box {
