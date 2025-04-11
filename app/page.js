@@ -142,7 +142,7 @@ export default function Home() {
 							<span className={`${ WinkySans_font.className } ${tempColor} text-2xl xl:text-5xl mb-4`}>°C</span>
 						</div>
 					</div>
-					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
+					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
 
 				<div className="flex-width">
@@ -153,15 +153,15 @@ export default function Home() {
 							<span className={`${ WinkySans_font.className } text-2xl xl:text-6xl mb-4`}>%</span>
 						</div>
 					</div>
-					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
+					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
 
 				<div className="flex-width">
 					<div className="attribute-box">
-						<span className={`${CaveatBrush_font.className} attribute-title`}>😶‍🌫 PM 2.5 (μg/m3)</span>
+						<span className={`${CaveatBrush_font.className} font-bold text-3xl 4xl:text-5xl`}>😶‍🌫 PM 2.5 (μg/m3)</span>
 						<span id="pm25" className={`${ WinkySans_font.className } attribute-text text-gray-500`}>145</span>
 					</div>
-					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>High Risk of heat stroke</span>
+					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>High Risk of heat stroke</span>
 				</div>
 
 				<div className="flex-width">
@@ -172,7 +172,7 @@ export default function Home() {
 							<span className={`${ WinkySans_font.className } text-2xl xl:text-6xl mb-4`}>%</span>
 						</div>
 					</div>
-					<span className={`${ WinkySans_font.className } text-4xl mt-5`}>Many people might go</span>
+					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Many people might go</span>
 				</div>
 
 			</div>
