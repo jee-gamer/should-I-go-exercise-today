@@ -30,8 +30,16 @@
   @apply text-5xl xl:text-9xl;
 }
 
-.normal-flex {
+.flex-width {
   @apply flex flex-col items-center justify-center w-1/6
+}
+
+.flex-width-time {
+  @apply flex flex-col items-center justify-center w-1/7
+}
+
+.normal-flex {
+  @apply flex flex-col items-center justify-center
 }
 
 .api-box {
@@ -56,4 +64,13 @@
   -8px  8px 0 #fff, 8px  8px 0 #fff,
   -9px  0px 0 #fff, 9px  0px 0 #fff,
   0px -9px 0 #fff, 0px  9px 0 #fff;
+}
+
+.text-outline-small {
+  -webkit-text-stroke: 7px white;
+  paint-order: stroke;
+}
+
+.time-button {
+  @apply border-5 w-full rounded-2xl h-2/3 text-5xl hover:opacity-50 mb-3
 }
