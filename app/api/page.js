@@ -68,12 +68,12 @@ export default function Api() {
                 </div>
                 <div className="api-box">
                     <span className="text-3xl w-1/3 align-text-top">lat</span>
-                    <span className="text-3xl w-1/3 align-text-top" >optional for /suggestion</span>
+                    <span className="text-3xl w-1/3 align-text-top" >for /suggestion</span>
                     <span className="text-3xl w-1/3">latitude of the location user wants suggestion</span>
                 </div>
                 <div className="api-box">
                     <span className="text-3xl w-1/3 align-text-top">lon</span>
-                    <span className="text-3xl w-1/3 align-text-top" >optional for /suggestion</span>
+                    <span className="text-3xl w-1/3 align-text-top" >for /suggestion</span>
                     <span className="text-3xl w-1/3">longitude of the location user wants suggestion</span>
                 </div>
                 <div className="api-box">
