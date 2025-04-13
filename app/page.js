@@ -49,7 +49,7 @@ export default function Home() {
 				className="absolute transform -translate-x-210 translate-y-200"
 			/>
 			<span className={`flex flex-col items-center justify-center gap-16 mt-20 text-8xl text-black text-outline ${CaveatBrush_font.className}`}>Should I go exercise today?</span>
-			<span className={`text-4xl ${WinkySans_font.className} text-gray-500 mt-10 `}>time - {time}</span>
+			<span id='currentTime' className={`text-4xl ${WinkySans_font.className} text-gray-500 mt-10 `}>time - {time}</span>
 
 
 			<div id="main" className="flex flex-row items-center justify-center gap-16 min-w-[1304px]">
