@@ -15,7 +15,7 @@ export default function Visualization() {
 
         if (!ctx) return;
 
-        const X = ['30', '31', '32', '33', '34'];
+        const X = ['25', '31', '32', '33', '40'];
         const xLabel = "Temperature (°C)"
         const Y = [12, 19, 3, 5, 8];
         const yLabel = "People"
@@ -26,7 +26,7 @@ export default function Visualization() {
     }, []);
 
     return (
-      <div className="flex flex-col items-center justify-items-center min-h-screen sm:p-20 font-[family-name:var(--font-geist-sans)] notebook">
+      <div className="flex flex-col items-center justify-items-center min-h-screen sm:p-20 font-[family-name:var(--font-geist-sans)] notebook-wo-line">
         <div id="main" className="flex flex-col items-center justify-items-start min-w-full min-h-full border">
             <span className={`text-9xl ${CaveatBrush_font.className} mt-10 text-outline`}> Visualization </span>
             <span className={`inline-block text-left text-4xl ${WinkySans_font.className} mt-20 w-5/6`}> Relationship Graph </span>

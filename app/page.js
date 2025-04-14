@@ -26,7 +26,7 @@ export default function Home() {
 	}, [time])
 
   return (
-    <div className="relative flex flex-col items-center justify-items	-center min-h-fit w-full max-w-screen sm:p-20 font-[family-name:var(--font-geist-sans)] notebook overflow-x-hidden z-0">
+    <div className="relative flex flex-col items-center justify-items-center min-h-fit w-full max-w-screen sm:p-20 font-[family-name:var(--font-geist-sans)] notebook overflow-x-hidden z-0">
 			<Image
 				src="/dumbbell2Outline.png"
 				width={ 900 }
