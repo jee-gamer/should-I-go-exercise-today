@@ -10,3 +10,5 @@ This will also show the relationship between the percentage of people going to e
 - Max/Min/Average amount of people that exercise in the day
 - Prediction of amount of people that exercise on time interval based on data fetched from api
 - Number representing Heatstroke risk
+
+<a href="../wiki">Go to WIKI</a>
