@@ -148,6 +148,8 @@ export default function Visualization() {
 				{/*	Put your graph here Putter, How you get the data from the Time and Weather value is up to you */}
 				</div>
 
+				<span className={`inline-block text-left text-4xl ${WinkySans_font.className} mt-20 w-5/6`}> More fucking graph..</span>
+
 			</div>
 		</div>
 	)
