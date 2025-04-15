@@ -98,35 +98,35 @@ export default function Home() {
 						onClick={() => setTime("Dawn")}>
 							<span className={`${CaveatBrush_font.className} text-blue-900`}>Dawn</span>
 						</button>
-						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>7-9 PM</span>
+						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>07:00 - 09:00</span>
 					</div>
 					<div name="button" className="flex-width-time h-full">
 						<button className={`time-button bg-gradient-to-r from-blue-200 to-yellow-200`}
 										onClick={() => setTime("Morning")}>
 							<span className={`${CaveatBrush_font.className} text-blue-900`}>Morning</span>
 						</button>
-						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>9-11 PM</span>
+						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>09:00 - 11:00</span>
 					</div>
 					<div name="button" className="flex-width-time h-full">
 						<button className={`time-button bg-gradient-to-r from-yellow-200 to-yellow-500`}
 										onClick={() => setTime("Noon")}>
 							<span className={`${CaveatBrush_font.className} text-blue-900`}>Noon</span>
 						</button>
-						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>11-13 PM</span>
+						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>11:00 - 13:00</span>
 					</div>
 					<div name="button" className="flex-width-time h-full">
 						<button className={`time-button bg-gradient-to-r from-yellow-500 to-orange-500`}
 										onClick={() => setTime("Afternoon")}>
 							<span className={`${CaveatBrush_font.className} text-blue-900`}>Afternoon</span>
 						</button>
-						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>13-15 PM</span>
+						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>13:00 - 15:00</span>
 					</div>
 					<div name="button" className="flex-width-time h-full">
 						<button className={`time-button bg-gradient-to-r from-orange-500 to-blue-200`}
 										onClick={() => setTime("Late Afternoon")}>
 							<span className={`${CaveatBrush_font.className} text-blue-900`}>Late Afternoon</span>
 						</button>
-						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>15-17 PM</span>
+						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>15:00 - 17:00</span>
 					</div>
 				</div>
 			</div>
