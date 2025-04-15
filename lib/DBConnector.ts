@@ -1,8 +1,9 @@
-import * as sql from 'mssql'
+import mysql from 'mysql2'
 
 class DBConnector {
     private static instance: null | DBConnector = null;
-    private connection: null | sql.ConnectionPool = null;
+    // Pool used to query using SQL syntax.
+    private pool: null | mysql.Pool = null;
 
     private constructor() {
     }
@@ -14,30 +15,35 @@ class DBConnector {
         return DBConnector.instance;
     }
 
-    public async connect(): Promise<void>{
-        if (this.connection) {
-            console.log("Already connected to database.");
+    public createPool(): void{
+        if (this.pool) {
+            console.log("Already have pool created.");
             return;
         }
         try {
+            // You can config database via .env.local file, read example.env for more
             const dbConfig = {
-                server: process.env.DB_SERVER as string,
+                host: process.env.DB_SERVER as string,
                 database: process.env.DB_NAME as string,
                 user: process.env.DB_USER as string,
                 password: process.env.DB_PASSWORD as string,
-                port: process.env.DB_PORT as unknown as number,
-                options: {
-                    encrypt: true,
-                    enableArithAbort: true
-                }
+                waitForConnections: true,
+                connectionLimit: 1,
+                queueLimit: 0,
             };
-            this.connection = await sql.connect(dbConfig);
-            console.log('Connected to SQL Server');
+            this.pool = mysql.createPool(dbConfig);
+            console.log('Pool created');
         } catch (error) {
-            console.error('Error connecting to SQL Server:', error);
+            console.error('Error creating pool:', error);
         }
+    }
+
+    public getPool() {
+        return this.pool;
     }
 }
 
 
-export default DBConnector.getInstance()
+const db = DBConnector.getInstance();
+db.createPool()
+export default db.getPool()
