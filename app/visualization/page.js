@@ -99,20 +99,20 @@ export default function Visualization() {
 				<div id="graph2" className="flex flex-row items-start justify-center w-5/6 h-[30vh] gap-16 border mt-15">
 					<div className="flex flex-col items-center w-1/2 h-full">
 						<BarChart
-							xData={['25', '31', '32', '33', '40']}
+							xData={['Dawn', 'Morning', 'Noon', 'Afternoon', 'Late Afternoon']}
 							yData={[12, 19, 3, 5, 8]}
-							xLabel="Temperature (°C)"
+							xLabel="Time"
 							yLabel="People"
 							title="Average people"
 						/>
 					</div>
 					<div className="flex flex-col items-center w-1/2 h-full">
 						<BarChart
-							xData={['25', '31', '32', '33', '40']}
+							xData={['Dawn', 'Morning', 'Noon', 'Afternoon', 'Late Afternoon']}
 							yData={[12, 19, 3, 5, 8]}
-							xLabel="Temperature (°C)"
+							xLabel="Time"
 							yLabel="People"
-							title="Average people"
+							title="Max people"
 						/>
 					</div>
 				</div>
