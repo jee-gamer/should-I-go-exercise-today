@@ -15,10 +15,10 @@ class DBConnector {
         return DBConnector.instance;
     }
 
-    public createPool(): void{
+    public createPool(): mysql.Pool {
         if (this.pool) {
             console.log("Already have pool created.");
-            return;
+            return this.pool;
         }
         try {
             // You can config database via .env.local file, read example.env for more
@@ -33,6 +33,7 @@ class DBConnector {
             };
             this.pool = mysql.createPool(dbConfig);
             console.log('Pool created');
+            return this.pool
         } catch (error) {
             console.error('Error creating pool:', error);
         }
@@ -44,6 +45,4 @@ class DBConnector {
 }
 
 
-const db = DBConnector.getInstance();
-db.createPool()
-export default db.getPool()
+export default DBConnector.getInstance();
