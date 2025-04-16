@@ -6,13 +6,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import time
 
-# HEADLESS stuff
-options = Options()
-options.add_argument("--headless")
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
-
-
 class Test(unittest.TestCase):
 
     @classmethod
@@ -38,6 +31,7 @@ class Test(unittest.TestCase):
 
         self.assertTrue(len(description) > 10)
 
+        time.sleep(10)
 
     def test_home_page_with_time(self):
         """
@@ -53,6 +47,8 @@ class Test(unittest.TestCase):
         buttons = driver.find_elements(by=By.NAME, value="button")  # will get dawn button because it's the first button
         dawn_button = buttons[3]
         dawn_button.click()
+
+        time.sleep(15)
 
         new_temperature = driver.find_element(by=By.ID, value="temperature").text
         new_people = driver.find_element(by=By.ID, value="people").text
