@@ -9,6 +9,30 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install frontend dependencies
+        run: npm install
+
+      - name: Start frontend server
+        run: npm run dev
+        env:
+          NODE_ENV: development
+
+      - name: Wait for frontend to be ready
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:3000 > /dev/null; then
+              echo "Frontend is up!"
+              break
+            fi
+            echo "Waiting for frontend to start..."
+            sleep 1
+          done  
+          
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -16,9 +40,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install selenium
-          pip install chromedriver-autoinstaller
-          pip install requests
+          pip install -r requirements.txt
 
       - name: Run Selenium and API tests
         run: python -m unittest tests/test_website.py
