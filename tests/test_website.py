@@ -17,7 +17,7 @@ class Test(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.driver = webdriver.Chrome()
+        cls.driver = webdriver.Chrome(options=options)
         cls.baseURL = "http://localhost:3000/"
 
     def test_home_page(self):
