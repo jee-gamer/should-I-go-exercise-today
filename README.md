@@ -104,13 +104,11 @@ This application requires a MySQL-compatible database table with the following s
 | `precip_mm`   | float      | No   | None                |                 |
 | `PM25`        | float      | No   | None                |                 |
 
-Here’s a new section for the README to match your project setup and model purpose:
-
 ---
 
 ## 🧠 Prediction Model
 
-This project includes a basic prediction model that estimates the number of people based on weather conditions such as temperature, humidity, precipitation, and PM2.5 levels. While the model may not provide highly accurate results due to data limitations and environmental complexity, it offers a useful approximation to support decision-making.
+This project includes a basic prediction model that estimates the number of people based on weather conditions such as temperature, humidity, precipitation, and PM2.5 levels. While the model may not provide highly accurate results due to data limitations, it offers a useful approximation to support decision-making.
 
 The model is trained using python sklearn library in **Google Colab**
 
