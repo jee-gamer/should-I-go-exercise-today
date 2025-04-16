@@ -88,3 +88,20 @@ python -m unittest discover tests
 - You have to connect to your own database and use your own data.
 ---
 
+## 💼 Database Schema Requirements
+
+This application requires a MySQL-compatible database table with the following schema:
+
+### Table: `yearProject`
+
+| Column        | Type       | Null | Default             | Extra           |
+|---------------|------------|------|---------------------|-----------------|
+| `id`          | int        | No   | None                | AUTO_INCREMENT  |
+| `timestamp`   | datetime   | No   | CURRENT_TIMESTAMP   | DEFAULT_GENERATED |
+| `temperature` | float      | No   | None                |                 |
+| `humidity`    | float      | No   | None                |                 |
+| `people`      | int        | No   | None                |                 |
+| `precip_mm`   | float      | No   | None                |                 |
+| `PM25`        | float      | No   | None                |                 |
+
+
