@@ -5,7 +5,7 @@ This will also show the relationship between the percentage of people going to e
 
 ## Api to be provided to users
 
-- Text Suggestion based on the data (Ex. You should go!: -description-)
+- Text Suggestion based on the data (Ex. YES: Outside is in good condition, go ahead and enjoy!)
 - Percentage of people doing exercise at current time interval
 - Max/Min/Average amount of people that exercise in the day
 - Prediction of amount of people that exercise on time interval based on data fetched from api
