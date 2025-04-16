@@ -69,7 +69,9 @@ class Test(unittest.TestCase):
 
         response = requests.get(f"{self.baseURL}api/suggestion")
         self.assertEqual(response.status_code, 200)
-        self.assertIn(response.text, ["yes", "no", "maybe"])
+        data = response.json()
+        self.assertIn(data['suggestion'], ["yes", "no", "maybe"])
+        self.assertTrue(len(data['description']) > 20)
 
         response = requests.get(f"{self.baseURL}api/people-at")
         self.assertEqual(response.status_code, 200)
