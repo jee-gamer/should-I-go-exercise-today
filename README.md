@@ -12,3 +12,79 @@ This will also show the relationship between the percentage of people going to e
 - Number representing Heatstroke risk
 
 <a href="../../wiki">Go to WIKI</a>
+
+## How to install
+
+### 🔧 Requirements
+
+Make sure you have the following installed:
+
+- **Node.js** (>=16.x)
+- **npm** (comes with Node)
+- **Python** (>=3.8)
+- **pip** (Python package installer)
+---
+
+## 📦 Setup Instructions
+
+### 1. **Clone the repository**
+
+```bash
+git clone https://github.com/jee-gamer/should-I-go-exercise-today.git
+cd your-repo
+```
+
+---
+
+### 2. **Install Node dependencies**
+
+```bash
+npm install
+```
+
+---
+
+### 3. **Install Python dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+Your `requirements.txt` should include:
+
+```txt
+selenium
+requests
+```
+---
+
+### 4. **Start the development server**
+
+```bash
+npm run dev
+```
+
+This will launch the frontend at:
+
+```
+http://localhost:3000
+```
+
+---
+
+### 5. **Run the tests**
+
+In a separate terminal (while the dev server is running):
+
+```bash
+python -m unittest discover tests
+```
+
+---
+
+## ✅ Notes
+
+- Make sure the dev server is **already running** before running Selenium or `requests` tests.
+- You have to connect to your own database and use your own data.
+---
+
