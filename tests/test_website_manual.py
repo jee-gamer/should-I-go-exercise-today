@@ -88,6 +88,29 @@ class Test(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.text, "0")
 
+    def test_suggestion(self):
+        """
+        Test the suggestion endpoint with latitude and longitude
+        """
+        params = {
+            'lat': 10.3212,
+            'lon': 13.1323
+        }
+        response = requests.get(f"{self.baseURL}api/suggestion", params=params)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(response.text, ["yes", "no", "maybe"])
+
+    def test_max_people(self):
+        """
+        Test the suggestion endpoint with latitude and longitude
+        """
+        params = {
+            'time': 'Dawn'
+        }
+        response = requests.get(f"{self.baseURL}api/max-people", params=params)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.text, "5??")
+
 
 if __name__ == "__main__":
     unittest.main()
