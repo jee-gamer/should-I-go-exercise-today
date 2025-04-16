@@ -18,7 +18,7 @@ jobs:
         run: npm install
 
       - name: Start frontend server
-        run: npm run dev
+        run: npm run dev &
         env:
           NODE_ENV: development
 
