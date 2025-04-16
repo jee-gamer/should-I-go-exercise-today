@@ -15,39 +15,44 @@ export default function Api() {
             <div id="apiBoxes" className="flex flex-col items-start justify-center w-5/6 gap-16 mt-20">
                 <div className="flex flex-row justify-center w-full pl-10 pr-10">
                     <span className={`text-4xl w-1/3 ${PM_font.className}`}>API</span>
-                    <span className={`text-4xl w-1/3 ${PM_font.className}`} >Path</span>
+                    <span className={`text-4xl w-1/3 ${PM_font.className}`}>Path</span>
                     <span className={`text-4xl w-1/3 ${PM_font.className}`}>Description</span>
                 </div>
 
                 <div className="api-box">
                     <span className="text-3xl w-1/3 align-text-top">Suggestion at [time]</span>
-                    <span className="text-3xl w-1/3 align-text-top" >/suggestion</span>
+                    <span className="text-3xl w-1/3 align-text-top">/suggestion</span>
                     <span className="text-3xl w-1/3">Return the suggestion whether you should go exercise at the time interval. Will return json {"{suggestion, description}"}</span>
                 </div>
                 <div className="api-box">
                     <span className="text-3xl w-1/3 align-text-top">People prediction at [time]</span>
-                    <span className="text-3xl w-1/3 align-text-top" >/people-at</span>
+                    <span className="text-3xl w-1/3 align-text-top">/people-at</span>
                     <span className="text-3xl w-1/3">Return the amount of people that might come attend basketball court at the time interval based on weather data at the location provided.</span>
                 </div>
                 <div className="api-box">
                     <span className="text-3xl w-1/3 align-text-top">People prediction now</span>
-                    <span className="text-3xl w-1/3 align-text-top" >/people-now</span>
+                    <span className="text-3xl w-1/3 align-text-top">/people-now</span>
                     <span className="text-3xl w-1/3">Return the amount of people that might come attend basketball court now based on weather data at the location provided.</span>
                 </div>
                 <div className="api-box">
                     <span className="text-3xl w-1/3 align-text-top">Average people at [time]</span>
-                    <span className="text-3xl w-1/3 align-text-top" >/average-people</span>
+                    <span className="text-3xl w-1/3 align-text-top">/average-people</span>
                     <span className="text-3xl w-1/3">Return the average amount of people that attend the basketball court at KU at the time interval</span>
                 </div>
                 <div className="api-box">
                     <span className="text-3xl w-1/3 align-text-top">Max people at [time]</span>
-                    <span className="text-3xl w-1/3 align-text-top" >/max-people</span>
+                    <span className="text-3xl w-1/3 align-text-top">/max-people</span>
                     <span className="text-3xl w-1/3">Return the max amount of people that attend the basketball court at KU at the time interval</span>
                 </div>
                 <div className="api-box">
                     <span className="text-3xl w-1/3 align-text-top">Min people at [time]</span>
-                    <span className="text-3xl w-1/3 align-text-top" >/min-people</span>
+                    <span className="text-3xl w-1/3 align-text-top">/min-people</span>
                     <span className="text-3xl w-1/3">Return the min amount of people that attend the basketball court at KU at the time interval</span>
+                </div>
+                <div className="api-box">
+                    <span className="text-3xl w-1/3 align-text-top">Heatstroke risk at [time]</span>
+                    <span className="text-3xl w-1/3 align-text-top">/heatstroke-risk</span>
+                    <span className="text-3xl w-1/3">Return heatstroke risk of the provided location at the provided time</span>
                 </div>
 
             </div>
