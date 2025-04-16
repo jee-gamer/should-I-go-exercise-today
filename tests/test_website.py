@@ -38,7 +38,6 @@ class Test(unittest.TestCase):
 
         self.assertTrue(len(description) > 10)
 
-
     def test_home_page_with_time(self):
         """
         Test that the home page have to show the suggestion after pressing time button
