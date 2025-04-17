@@ -1,6 +1,4 @@
-import {Pool} from "mysql2";
-import connector from "@/lib/DBConnector"
-import {INTERVAL} from "@/lib/INTERVAL";
+import WeatherAPI from "@/lib/WeatherAPI";
 
 class Recommendation {
     private static instance: Recommendation;
@@ -18,9 +16,9 @@ class Recommendation {
     }
 
     public async suggestion(
-        time: string,
-        lat: number,
-        lon: number
+        time?: string,
+        lat?: number,
+        lon?: number
     ): Promise<{
         suggestion: string,
         description: string
@@ -29,31 +27,7 @@ class Recommendation {
             suggestion: "unavailable",
             description: "unavailable"
         }
-        time = time.toLowerCase();
-        const now = new Date(new Date().toLocaleString('en-US', {timeZone: 'Asia/Bangkok'}));
-        let hour: number;
-        if (time === "now") {
-            hour = now.getHours();
-        } else if (INTERVAL[time]) {
-            hour = INTERVAL[time].rep;
-        }
-        if (hour > 17 || hour < 7) {
-            return result;
-        }
-        const url = `http://api.weatherapi.com/v1/forecast.json?key=${this.key}&q=${lat},${lon}&aqi=yes&hour=${hour}`
-        let res: Response;
-        let json: any;
-        try {
-            res = await fetch(url);
-            if (!res.ok) {
-                throw new Error(`Response status: ${res.status}`);
-            }
-            json = await res.json();
-        } catch (error) {
-            console.error(error.message);
-            return result;
-        }
-        const hourForecast = json.forecast.forecastday[0].hour[0];
+        const hourForecast = await WeatherAPI.fetchData(time, lat, lon)
         result.suggestion = "No";
         if (hourForecast.precip_mm >= 1) {
             result.description = "It's raining outside, better stay indoor!";
