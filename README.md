@@ -61,14 +61,7 @@ requests
 ### 4. **Create .env.local file**
 
 ```txt
-Find the example from example.env
-```
-
-Your `requirements.txt` should include:
-
-```txt
-selenium
-requests
+Find the example from example.env from root directory
 ```
 ---
 
