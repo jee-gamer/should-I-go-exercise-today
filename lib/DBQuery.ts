@@ -15,15 +15,13 @@ interface Schema extends RowDataPacket{
 
 class DBQuery {
     private static instance: DBQuery;
-    private readonly pool: Pool;
 
-    private constructor(dbPool: Pool) {
-        this.pool = dbPool;
+    private constructor() {
     }
 
-    static getInstance(dbPool: Pool) {
+    static getInstance() {
         if (!DBQuery.instance) {
-            DBQuery.instance = new DBQuery(dbPool);
+            DBQuery.instance = new DBQuery();
         }
         return DBQuery.instance
     }
@@ -46,7 +44,7 @@ class DBQuery {
             q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
         }
         q += ";";
-        const [result] = await this.pool.query<Schema[]>(q);
+        const [result] = await pool.query<Schema[]>(q);
         return {people: result.map(n => n.people)};
     }
 
@@ -58,10 +56,10 @@ class DBQuery {
             q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
         }
         q += ";";
-        const [result] = await this.pool.query<Schema[]>(q);
+        const [result] = await pool.query<Schema[]>(q);
         return {temperature: result.map(n => n.temperature)};
     }
 }
 
 
-export default DBQuery.getInstance(pool);
+export default DBQuery.getInstance();

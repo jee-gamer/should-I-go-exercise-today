@@ -1,4 +1,4 @@
-import {Pool, createPool} from 'mysql2/promise'
+import {Pool, createPool, createConnection} from 'mysql2/promise'
 
 
 // You can config database via .env.local file, read example.env for more
@@ -19,4 +19,17 @@ try {
 } catch (error) {
     console.error('Error creating pool:', error);
 }
+
 export default dbPool;
+
+process.once('SIGINT', async () => {
+    console.log('Gracefully shutting down MySQL pool (SIGINT)');
+    await dbPool.end();
+    process.exit();
+});
+
+process.once('SIGTERM', async () => {
+    console.log('Gracefully shutting down MySQL pool (SIGTERM)');
+    await dbPool.end();
+    process.exit();
+});
