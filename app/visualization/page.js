@@ -21,11 +21,11 @@ export default function Visualization() {
 
 	return (
 		<div className="flex flex-col items-center justify-items-center min-h-fit h-screen sm:p-20 font-[family-name:var(--font-geist-sans)] text-black notebook-wo-line">
-			<div id="main" className="flex flex-col items-center justify-items-start min-w-full min-h-screen border">
+			<div id="main" className="flex flex-col items-center justify-items-start min-w-full min-h-screen">
 				<span className={`text-9xl ${CaveatBrush_font.className} mt-10 text-outline`}> Visualization </span>
 				<span className={`inline-block text-left text-4xl ${WinkySans_font.className} mt-20 w-5/6 mb-15`}> Relationship Graph between people and weather</span>
 
-				<div id="graph1" className="flex flex-row items-start justify-center w-5/6 h-[30vh] gap-16 border">
+				<div id="graph1" className="flex flex-row items-start justify-center w-5/6 h-[30vh] gap-16">
 					<div className="w-1/2 h-full">
 						<LineChart
 							xData={['25', '31', '32', '33', '40']}
@@ -46,7 +46,7 @@ export default function Visualization() {
 					</div>
 				</div>
 
-				<div id="graph2" className="flex flex-row items-start justify-center w-5/6 h-[30vh] gap-16 mt-10 border">
+				<div id="graph2" className="flex flex-row items-start justify-center w-5/6 h-[30vh] gap-16 mt-10 ">
 					<div className="w-1/2 h-full">
 						<LineChart
 							xData={['25', '31', '32', '33', '40']}
@@ -92,11 +92,11 @@ export default function Visualization() {
 
 				<div
 					className="flex flex-row items-center justify-center w-5/6 h-[30vh] gap-16 mt-20 border">
-				{/*	Put your graph here Putter, How you get the data from the Time and Weather value is up to you */}
+				{/*	I will pull the data from the api putter make */}
 				</div>
 
 				<span className={`inline-block text-left text-4xl ${WinkySans_font.className} mt-20 w-5/6`}> Bar Chart comparing amount of people throughout the day</span>
-				<div id="graph2" className="flex flex-row items-start justify-center w-5/6 h-[30vh] gap-16 border mt-15">
+				<div id="graph2" className="flex flex-row items-start justify-center w-5/6 h-[30vh] gap-16  mt-15">
 					<div className="flex flex-col items-center w-1/2 h-full">
 						<BarChart
 							xData={['Dawn', 'Morning', 'Noon', 'Afternoon', 'Late Afternoon']}
