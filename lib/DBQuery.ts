@@ -36,28 +36,22 @@ class DBQuery {
                             null
     }
 
-    async getAllPeople(time: string): Promise<{
-        people: number[]
+    async getField(time: string, field: string): Promise<{
+        field?: string,
+        result?: number[],
+        error_message?: string
     }> {
-        let q = "SELECT people, timestamp FROM yearProject";
+        let q = `SELECT ${field}, timestamp FROM yearProject`;
         if (INTERVAL[time]) {
             q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
         }
         q += ";";
-        const [result] = await pool.query<Schema[]>(q);
-        return {people: result.map(n => n.people)};
-    }
-
-    async getAllTemp(time: string): Promise<{
-        temperature: number[]
-    }> {
-        let q = "SELECT temperature, timestamp FROM yearProject";
-        if (INTERVAL[time]) {
-            q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
+        try {
+            const [result] = await pool.query<Schema[]>(q);
+            return {field: field, result: result.map(n => n.people)};
+        } catch (error) {
+            return {error_message: error}
         }
-        q += ";";
-        const [result] = await pool.query<Schema[]>(q);
-        return {temperature: result.map(n => n.temperature)};
     }
 }
 

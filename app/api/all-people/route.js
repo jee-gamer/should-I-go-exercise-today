@@ -11,9 +11,9 @@ export async function GET(req) {
   `
   const searchParam = new URLSearchParams(new URL(req.url).search);
   let time = searchParam.get("time");
-  const data = await DBQuery.getAllPeople(time);
+  const data = await DBQuery.getField(time, "people");
   return new Response(JSON.stringify(data), {
-    status: 200,
+    status: data.error_message ? 500 : 200,
     headers: { 'Content-Type': 'application/json' },
   })
 }
