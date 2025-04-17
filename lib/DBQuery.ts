@@ -85,11 +85,12 @@ class DBQuery {
             fields = ["light", "temperature", "humidity", "people", "precip_mm", "PM25"]
         }
         fieldString = fields.map(f => `${method.toUpperCase()}(${f}) AS ${f}`).join(", ");
-        let q = `SELECT ${fieldString}, timestamp FROM yearProject`;
+        let q = `SELECT ${fieldString} FROM`;
         if (INTERVAL[time]) {
-            q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
+            q += ` (SELECT ${fields.join(", ")}, timestamp FROM yearProject WHERE TIME(timestamp) BETWEEN '09:00:00' AND '11:00:00') s;`
+        } else {
+            q += ` yearProject;`;
         }
-        q += ";";
         try {
             const [result] = await pool.query<Schema[]>(q);
             const returned = {}
