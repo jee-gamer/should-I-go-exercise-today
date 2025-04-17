@@ -9,7 +9,7 @@ import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-	const [temp, setTemp] = useState(31); // temp here
+	const [temp, setTemp] = useState(35); // temp here
 	const [tempColor, setTempColor] = useState("");
 
 	const [time, setTime] = useState("now");
@@ -50,7 +50,6 @@ export default function Home() {
 			/>
 			<span className={`flex flex-col items-center justify-center gap-16 mt-20 text-8xl text-black text-outline ${CaveatBrush_font.className}`}>Should I go exercise today?</span>
 			<span id='currentTime' className={`text-4xl ${WinkySans_font.className} text-gray-500 mt-10 `}>time - {time}</span>
-
 
 			<div id="main" className="flex flex-row items-center justify-center gap-16 min-w-[1304px]">
 
@@ -142,7 +141,7 @@ export default function Home() {
 							<span className={`${ WinkySans_font.className } ${tempColor} text-2xl xl:text-5xl mb-4`}>°C</span>
 						</div>
 					</div>
-					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>High Risk of heat stroke</span>
+					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Moderate Risk of heat stroke</span>
 				</div>
 
 				<div className="flex-width">
@@ -153,31 +152,32 @@ export default function Home() {
 							<span className={`${ WinkySans_font.className } text-2xl xl:text-6xl mb-4`}>%</span>
 						</div>
 					</div>
-					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>High Risk of heat stroke</span>
+					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Hard to cooldown</span>
 				</div>
 
 				<div className="flex-width">
 					<div className="attribute-box">
 						<span className={`${CaveatBrush_font.className} font-bold text-3xl 4xl:text-5xl`}>😶‍🌫 PM 2.5 (μg/m3)</span>
-						<span id="pm25" className={`${ WinkySans_font.className } attribute-text text-gray-500`}>145</span>
+						<span id="pm25" className={`${ WinkySans_font.className } attribute-text text-gray-500`}>8</span>
 					</div>
-					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>High Risk of heat stroke</span>
+					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Perfectly fine to go out</span>
 				</div>
 
 				<div className="flex-width">
 					<div id="people" className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title`}>👨‍👨 People</span>
 						<div className="flex flex-row items-end">
-							<span id="people" className={`${ WinkySans_font.className } attribute-text`}>64</span>
+							<span id="people" className={`${ WinkySans_font.className } attribute-text`}>24</span>
 							<span className={`${ WinkySans_font.className } text-2xl xl:text-6xl mb-4`}>%</span>
 						</div>
 					</div>
-					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Many people might go</span>
+					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Barely anyone might come</span>
 				</div>
 
 			</div>
 
 			<Link
+				id="api"
 				href="/api"
 				className={`relative flex flex-col items-center justify-center min-w-100 max-w-200 gap-16 mt-10 mb-40 text-5xl text-black rounded-2xl p-2 hover:text-gray-600 hover:opacity-70 ${ PM_font.className }`}
 			>
@@ -190,6 +190,11 @@ export default function Home() {
 					className="absolute -top-15 -left-5 min-w-100"
 				/>
 			</Link>
+
+			<div className="flex flex-col items-start justify-items-center">
+				<span id='currentTime' className={`text-2xl ${WinkySans_font.className} text-gray-500 mt-10 `}>* If location is not provided we will use location of Kasetsart University at Bangkhen</span>
+				<span id='currentTime' className={`text-2xl ${WinkySans_font.className} text-gray-500 mt-5 `}>* The people prediction is only available through 7:00-17:00</span>
+			</div>
 
 		</div>
   );

@@ -91,8 +91,14 @@ export default function Visualization() {
 				</div>
 
 				<div
-					className="flex flex-row items-center justify-center w-5/6 h-[30vh] gap-16 mt-20 border">
-				{/*	I will pull the data from the api putter make */}
+					className="flex flex-row items-center justify-center w-5/6 h-[50vh] gap-16 mt-20 border">
+					<LineChart
+						xData={['25', '31', '32', '33', '40']}
+						yData={[12, 19, 3, 5, 8]}
+						xLabel="Temperature (°C)"
+						yLabel="People"
+						title="PM 2.5"
+					/>
 				</div>
 
 				<span className={`inline-block text-left text-4xl ${WinkySans_font.className} mt-20 w-5/6`}> Bar Chart comparing amount of people throughout the day</span>
