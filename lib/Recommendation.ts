@@ -3,18 +3,16 @@ import connector from "@/lib/DBConnector"
 import {INTERVAL} from "@/lib/INTERVAL";
 
 class Recommendation {
-    private static instance: Recommendation | null = null;
-    private pool: Pool;
-    private key: string;
+    private static instance: Recommendation;
+    private readonly key: string;
 
-    private constructor(dbPool: Pool, key: string) {
-        this.pool = dbPool
+    private constructor(key: string) {
         this.key = key
     }
 
-    public static getInstance(dbPool: Pool, apiKey: string) {
+    public static getInstance(apiKey: string) {
         if (!Recommendation.instance) {
-            Recommendation.instance = new Recommendation(dbPool, apiKey);
+            Recommendation.instance = new Recommendation(apiKey);
         }
         return Recommendation.instance;
     }
@@ -116,6 +114,5 @@ class Recommendation {
 }
 
 
-const pool: Pool = connector.createPool();
 const key: string = process.env.API_KEY;
-export default Recommendation.getInstance(pool, key);
+export default Recommendation.getInstance(key);

@@ -1,7 +1,8 @@
-import db from "@/lib/DBConnector";
 import recommendation from "@/lib/Recommendation";
 
 export async function GET(req) {
+  // possible time param: ['dawn', 'morning', 'noon', 'afternoon', 'late-afternoon']
+  // example: /api/suggestion?time=dawn: this will response suggestion at 8 AM of today
   const searchParam = new URLSearchParams(new URL(req.url).search);
   let time = searchParam.get("time");
   let lat = searchParam.get("lat");
