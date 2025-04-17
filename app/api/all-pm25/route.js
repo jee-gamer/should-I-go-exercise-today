@@ -7,7 +7,8 @@ export async function GET(req) {
   if omitted, it will get all PM2.5 record from database.
   example use: baseurl/api/all-pm25?time=noon; this will get you the all the record of PM2.5 between 11 and 13.
   example use: baseurl/api/all-pm25; time is omitted, the result will be all record from database.
-  return { PM25: number[] }
+  return { field: "PM25", result: number[] }
+  return { error_message: error } if there's an error occur internally.
   `
   const searchParam = new URLSearchParams(new URL(req.url).search);
   let time = searchParam.get("time");

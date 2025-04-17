@@ -7,7 +7,8 @@ export async function GET(req) {
   if omitted, it will get all temperature record from database.
   example use: baseurl/api/all-temperature?time=noon; this will get you the all the record of temperature between 11 and 13.
   example use: baseurl/api/all-temperature; time is omitted, the result will be all record from database.
-  return { temperature: number[] }
+  return { field: "temperature", result: number[] }
+  return { error_message: error } if there's an error occur internally.
   `
   const searchParam = new URLSearchParams(new URL(req.url).search);
   let time = searchParam.get("time");

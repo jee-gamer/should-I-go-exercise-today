@@ -7,7 +7,8 @@ export async function GET(req) {
   if omitted, it will get all precip record from database.
   example use: baseurl/api/all-precip?time=noon; this will get you the all the record of precip between 11 and 13.
   example use: baseurl/api/all-precip; time is omitted, the result will be all record from database.
-  return { precip: number[] }
+  return { field: "precip_mm", result: number[] }
+  return { error_message: error } if there's an error occur internally.
   `
   const searchParam = new URLSearchParams(new URL(req.url).search);
   let time = searchParam.get("time");
