@@ -1,5 +1,5 @@
-import {Pool, RowDataPacket} from "mysql2";
-import DBConnector from "@/lib/DBConnector";
+import {Pool, RowDataPacket} from "mysql2/promise";
+import pool from "@/lib/dbPool";
 import {INTERVAL} from "@/lib/INTERVAL";
 
 interface Schema extends RowDataPacket{
@@ -46,11 +46,22 @@ class DBQuery {
             q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
         }
         q += ";";
-        const [result] = await this.pool.promise().query<Schema[]>(q);
+        const [result] = await this.pool.query<Schema[]>(q);
         return {people: result.map(n => n.people)};
+    }
+
+    async getAllTemp(time: string): Promise<{
+        temperature: number[]
+    }> {
+        let q = "SELECT temperature, timestamp FROM yearProject";
+        if (INTERVAL[time]) {
+            q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
+        }
+        q += ";";
+        const [result] = await this.pool.query<Schema[]>(q);
+        return {temperature: result.map(n => n.temperature)};
     }
 }
 
 
-const pool: Pool = DBConnector.getPool();
 export default DBQuery.getInstance(pool);
