@@ -79,14 +79,19 @@ class DBQuery {
         }
     }
 
-    async getAggregate(fields: string[], method: string) {
+    async getAggregate(fields: string[], method: string, time?: string) {
         let fieldString: string;
         if (!fields || fields.length == 0) {
             fields = ["light", "temperature", "humidity", "people", "precip_mm", "PM25"]
         }
         fieldString = fields.map(f => `${method.toUpperCase()}(${f}) AS ${f}`).join(", ");
+        let q = `SELECT ${fieldString}, timestamp FROM yearProject`;
+        if (INTERVAL[time]) {
+            q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
+        }
+        q += ";";
         try {
-            const [result] = await pool.query<Schema[]>(`SELECT ${fieldString} FROM yearProject`);
+            const [result] = await pool.query<Schema[]>(q);
             const returned = {}
             for (const field of fields) {
                 returned[field] = result[0][field];
