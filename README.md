@@ -58,7 +58,21 @@ requests
 ```
 ---
 
-### 4. **Start the development server**
+### 4. **Create .env.local file**
+
+```txt
+Find the example from example.env
+```
+
+Your `requirements.txt` should include:
+
+```txt
+selenium
+requests
+```
+---
+
+### 5. **Start the development server**
 
 ```bash
 npm run dev
@@ -72,7 +86,7 @@ http://localhost:3000
 
 ---
 
-### 5. **Run the tests**
+### 6. **Run the tests**
 
 In a separate terminal (while the dev server is running):
 
