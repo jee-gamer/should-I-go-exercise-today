@@ -2,7 +2,7 @@ import {Pool, RowDataPacket} from "mysql2/promise";
 import pool from "@/lib/dbPool";
 import {INTERVAL} from "@/lib/INTERVAL";
 
-interface Schema extends RowDataPacket{
+interface Schema extends RowDataPacket {
     id: number;
     timestamp: Date;
     light: number;
@@ -60,10 +60,11 @@ class DBQuery {
         error_message?: string
     }> {
         let fieldString: string;
-        if (fields) {
-            fieldString = fields.join(", ") + ", timestamp";
-        } else {
+        if (!fields || fields.length == 0) {
             fieldString = "*";
+            fields = ["id", "timestamp", "light", "temperature", "humidity", "people", "precip_mm", "PM25"]
+        } else {
+            fieldString = fields.join(", ") + ", timestamp";
         }
         let q = `SELECT ${fieldString} FROM yearProject`
         if (INTERVAL[time]) {
