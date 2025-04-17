@@ -24,7 +24,7 @@ class LinearRegression {
             if (!data.error_message) {
                 const X = data.result.map(row => row.slice(0, 2))
                 const Y = data.result.map(row => row.slice(2))
-                const maxPeople = (await DBQuery.getMax(["people"]))["people"];
+                const maxPeople = (await DBQuery.getAggregate(["people"], "max"))["people"];
                 LinearRegression.instance = new LinearRegression(X, Y, maxPeople);
             }
         }

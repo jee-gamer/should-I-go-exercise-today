@@ -79,12 +79,12 @@ class DBQuery {
         }
     }
 
-    async getMax(fields: string[]) {
+    async getAggregate(fields: string[], method: string) {
         let fieldString: string;
         if (!fields || fields.length == 0) {
             fields = ["light", "temperature", "humidity", "people", "precip_mm", "PM25"]
         }
-        fieldString = fields.map(f => `MAX(${f}) AS ${f}`).join(", ");
+        fieldString = fields.map(f => `${method.toUpperCase()}(${f}) AS ${f}`).join(", ");
         try {
             const [result] = await pool.query<Schema[]>(`SELECT ${fieldString} FROM yearProject`);
             const returned = {}
