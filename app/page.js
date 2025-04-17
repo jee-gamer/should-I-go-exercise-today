@@ -177,6 +177,7 @@ export default function Home() {
 			</div>
 
 			<Link
+				id="api"
 				href="/api"
 				className={`relative flex flex-col items-center justify-center min-w-100 max-w-200 gap-16 mt-10 mb-40 text-5xl text-black rounded-2xl p-2 hover:text-gray-600 hover:opacity-70 ${ PM_font.className }`}
 			>

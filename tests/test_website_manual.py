@@ -31,7 +31,7 @@ class Test(unittest.TestCase):
 
         self.assertTrue(len(description) > 10)
 
-        time.sleep(10)
+        time.sleep(7)
 
     def test_home_page_with_time(self):
         """
@@ -46,9 +46,10 @@ class Test(unittest.TestCase):
 
         buttons = driver.find_elements(by=By.NAME, value="button")  # will get dawn button because it's the first button
         dawn_button = buttons[3]
-        dawn_button.click()
 
-        time.sleep(15)
+        time.sleep(4)
+
+        dawn_button.click()
 
         new_temperature = driver.find_element(by=By.ID, value="temperature").text
         new_people = driver.find_element(by=By.ID, value="people").text
@@ -57,6 +58,21 @@ class Test(unittest.TestCase):
         self.assertNotEqual(current_time, new_time)
         self.assertNotEqual(temperature, new_temperature)
         self.assertNotEqual(people, new_people)
+
+    def test_home_page_api_button(self):
+        driver = self.driver
+        driver.get(self.baseURL)
+
+        api_button = driver.find_element(by=By.ID, value="api")
+
+        time.sleep(5)
+
+        api_button.click()
+
+        current_url = driver.current_url
+        self.assertEqual(f"{self.baseURL}/api", current_url)
+
+        time.sleep(3)
 
     def test_api(self):
         """
@@ -102,7 +118,7 @@ class Test(unittest.TestCase):
 
     def test_max_people(self):
         """
-        Test the suggestion endpoint with latitude and longitude
+        Test the max people endpoint with absolute value
         """
         params = {
             'time': 'Dawn'

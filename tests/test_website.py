@@ -61,6 +61,18 @@ class Test(unittest.TestCase):
         self.assertNotEqual(temperature, new_temperature)
         self.assertNotEqual(people, new_people)
 
+    def test_home_page_api_button(self):
+        driver = self.driver
+        driver.get(self.baseURL)
+
+        api_button = driver.find_element(by=By.ID, value="api")
+        api_button.click()
+
+        current_url = driver.current_url
+        self.assertEqual(f"{self.baseURL}/api", current_url)
+
+        time.sleep(3)
+
     def test_api(self):
         """
         Test that the api will return numerical values or json based on the api chosen
@@ -93,6 +105,28 @@ class Test(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.text, "0")
 
+    def test_suggestion(self):
+        """
+        Test the suggestion endpoint with latitude and longitude
+        """
+        params = {
+            'lat': 10.3212,
+            'lon': 13.1323
+        }
+        response = requests.get(f"{self.baseURL}api/suggestion", params=params)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(response.text, ["yes", "no", "maybe"])
+
+    def test_max_people(self):
+        """
+        Test the max people endpoint with absolute value
+        """
+        params = {
+            'time': 'Dawn'
+        }
+        response = requests.get(f"{self.baseURL}api/max-people", params=params)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.text, "5??")
 
 if __name__ == "__main__":
     unittest.main()
