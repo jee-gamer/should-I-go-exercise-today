@@ -22,8 +22,8 @@ class WeatherAPI {
 
     async fetchData(
         time?: string,
-        lat?: number,
-        lon?: number
+        lat?: string,
+        lon?: string
         ) {
         const now = new Date(new Date().toLocaleString('en-US', {timeZone: 'Asia/Bangkok'}));
         let hour: number;
@@ -34,9 +34,9 @@ class WeatherAPI {
         } if (hour > 17 || hour < 7) {
             return null;
         } if (!lat) {
-            lat = 13.833;
+            lat = 13.833.toString();
         } if (!lon) {
-            lon = 100.483;
+            lon = 100.483.toString();
         }
         const url = `${this.baseURL}?key=${this.key}&q=${lat},${lon}&aqi=yes&hour=${hour}`
         let res: Response;

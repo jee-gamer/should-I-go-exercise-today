@@ -10,8 +10,6 @@ export async function GET(req) {
   example use: baseurl/api/suggestion?time=dawn; returns suggestion and description at 8 AM of today
   return: { suggestion: string, description: string }
   `
-  // possible time param: ['dawn', 'morning', 'noon', 'afternoon', 'late-afternoon']
-  // example: /api/suggestion?time=dawn: this will response suggestion at 8 AM of today
   const searchParam = new URLSearchParams(new URL(req.url).search);
   let time = searchParam.get("time");
   let lat = searchParam.get("lat");

@@ -17,8 +17,8 @@ class Recommendation {
 
     public async suggestion(
         time?: string,
-        lat?: number,
-        lon?: number
+        lat?: string,
+        lon?: string
     ): Promise<{
         suggestion: string,
         description: string
