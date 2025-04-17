@@ -1,4 +1,4 @@
-import {Pool, createPool, createConnection} from 'mysql2/promise'
+import {Pool, createPool} from 'mysql2/promise'
 
 
 // You can config database via .env.local file, read example.env for more
@@ -11,24 +11,28 @@ const dbConfig = {
     connectionLimit: 1,
     queueLimit: 0,
 };
-let dbPool: Pool;
-try {
-    // Pool used to query using SQL syntax.
-    dbPool = createPool(dbConfig);
-    console.log('Pool created');
-} catch (error) {
-    console.error('Error creating pool:', error);
-}
+
+let globalPool = global as typeof globalThis & {
+    pool?: Pool;
+};
+
+const dbPool: Pool =
+    globalPool.pool ||
+    createPool(dbConfig).on('connection', () => {
+        console.log("Pool created");
+    });
+
+if (!globalPool.pool) globalPool.pool = dbPool;
 
 export default dbPool;
 
-process.once('SIGINT', async () => {
+process.on('SIGINT', async () => {
     console.log('Gracefully shutting down MySQL pool (SIGINT)');
     await dbPool.end();
     process.exit();
 });
 
-process.once('SIGTERM', async () => {
+process.on('SIGTERM', async () => {
     console.log('Gracefully shutting down MySQL pool (SIGTERM)');
     await dbPool.end();
     process.exit();
