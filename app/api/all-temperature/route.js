@@ -12,7 +12,7 @@ export async function GET(req) {
   `
   const searchParam = new URLSearchParams(new URL(req.url).search);
   let time = searchParam.get("time");
-  const data = await DBQuery.getField(time, "temperature");
+  const data = await DBQuery.getField("temperature", time);
   return new Response(JSON.stringify(data), {
     status: data.error_message ? 500 : 200,
     headers: { 'Content-Type': 'application/json' },

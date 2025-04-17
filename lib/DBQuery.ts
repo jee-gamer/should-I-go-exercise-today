@@ -36,7 +36,7 @@ class DBQuery {
                             null
     }
 
-    async getField(time: string, field: string): Promise<{
+    async getField(field: string, time?: string): Promise<{
         field?: string,
         result?: number[],
         error_message?: string
@@ -54,7 +54,7 @@ class DBQuery {
         }
     }
 
-    async getFields(time: string, fields: string[]): Promise<{
+    async getFields(fields: string[], time?: string): Promise<{
         fields?: string[],
         result?: number[][],
         error_message?: string
