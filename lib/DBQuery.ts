@@ -78,6 +78,24 @@ class DBQuery {
             return {error_message: error}
         }
     }
+
+    async getMax(fields: string[]) {
+        let fieldString: string;
+        if (!fields || fields.length == 0) {
+            fields = ["light", "temperature", "humidity", "people", "precip_mm", "PM25"]
+        }
+        fieldString = fields.map(f => `MAX(${f}) AS ${f}`).join(", ");
+        try {
+            const [result] = await pool.query<Schema[]>(`SELECT ${fieldString} FROM yearProject`);
+            const returned = {}
+            for (const field of fields) {
+                returned[field] = result[0][field];
+            }
+            return returned;
+        } catch (error) {
+            return {error_message: error};
+        }
+    }
 }
 
 

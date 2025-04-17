@@ -2,18 +2,19 @@ import MultivariateLinearRegression from 'ml-regression-multivariate-linear'
 import DBQuery from "@/lib/DBQuery";
 import WeatherAPI from "@/lib/WeatherAPI";
 
-const max_people = 30 // max ever, we don't know this yet.
 
 class LinearRegression {
     readonly X: number[][] // a row can have many column
     readonly Y: number[][]
+    readonly maxPeople: number;
     readonly regressionModel: any
     private static instance: LinearRegression
 
 
-     private constructor(X: number[][], Y: number[][]) {
+     private constructor(X: number[][], Y: number[][], maxPeople: number) {
         this.X = X;
         this.Y = Y;
+        this.maxPeople = maxPeople;
         this.regressionModel = new MultivariateLinearRegression(X, Y)
     }
 
@@ -23,7 +24,8 @@ class LinearRegression {
             if (!data.error_message) {
                 const X = data.result.map(row => row.slice(0, 2))
                 const Y = data.result.map(row => row.slice(2))
-                LinearRegression.instance = new LinearRegression(X, Y);
+                const maxPeople = (await DBQuery.getMax(["people"]))["people"];
+                LinearRegression.instance = new LinearRegression(X, Y, maxPeople);
             }
         }
         return LinearRegression.instance
@@ -36,8 +38,8 @@ class LinearRegression {
         if (!data || data.error) {
             return {prediction: null, percentage: null};
         }
-        const prediction: number = this.regressionModel.predict([data.temp_c, data.humidity]);
-        const percentage: number = prediction / max_people;
+        const prediction: number = this.regressionModel.predict([data.temp_c, data.humidity])[0];
+        const percentage: number = prediction / this.maxPeople;
         return {prediction: prediction, percentage: percentage};
     }
 }
