@@ -13,7 +13,7 @@ export async function GET(req) {
   let lon = searchParam.get("lon");
   const data = await LinearRegression.predict(null, lat, lon);
   return new Response(JSON.stringify(data), {
-    status: 200,
+    status: data.prediction? 200 : 404,
     headers: { 'Content-Type': 'application/json' },
   })
 }

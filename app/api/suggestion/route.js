@@ -16,7 +16,7 @@ export async function GET(req) {
   let lon = searchParam.get("lon");
   const data = await recommendation.suggestion(time, lat, lon)
   return new Response(JSON.stringify(data), {
-    status: 200,
+    status: data.suggestion === "unavailable" ? 503 : 200,
     headers: { 'Content-Type': 'application/json' },
   })
 }
