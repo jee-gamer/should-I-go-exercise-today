@@ -48,7 +48,31 @@ class DBQuery {
         q += ";";
         try {
             const [result] = await pool.query<Schema[]>(q);
-            return {field: field, result: result.map(n => n.people)};
+            return {field: field, result: result.map(n => n[field])};
+        } catch (error) {
+            return {error_message: error}
+        }
+    }
+
+    async getFields(time: string, fields: string[]): Promise<{
+        fields?: string[],
+        result?: number[][],
+        error_message?: string
+    }> {
+        let fieldString: string;
+        if (fields) {
+            fieldString = fields.join(", ") + ", timestamp";
+        } else {
+            fieldString = "*";
+        }
+        let q = `SELECT ${fieldString} FROM yearProject`
+        if (INTERVAL[time]) {
+            q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
+        }
+        q += ";";
+        try {
+            const [result] = await pool.query<Schema[]>(q);
+            return {fields: fields, result: result.map(n => fields.map(f => n[f]))};
         } catch (error) {
             return {error_message: error}
         }
