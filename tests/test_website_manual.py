@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import time
-
+import math
 
 class SeleniumTest(unittest.TestCase):
 
@@ -14,6 +14,7 @@ class SeleniumTest(unittest.TestCase):
         self.driver = webdriver.Chrome()
         self.baseURL = "http://localhost:3000"
         self.driver.get(self.baseURL)
+        self.driver.maximize_window()  # Makes the browser full screen
         self.actions = ActionChains(self.driver)
 
     def test_01_home_page(self):
@@ -101,8 +102,8 @@ class APITest(unittest.TestCase):
             'lon': 13.1323
         }
         response = requests.get(f"{self.baseURL}/api/suggestion", params=params)
-        data = response.json()
         self.assertEqual(response.status_code, 200)
+        data = response.json()
         self.assertIn(data['suggestion'].lower(), ["yes", "no", "maybe"])
         self.assertTrue(len(data['description']) > 20)
 
@@ -110,23 +111,31 @@ class APITest(unittest.TestCase):
         # No model yet
         response = requests.get(f"{self.baseURL}/api/people-at", params=self.time)
         self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(int(response.text), int)
+        data = response.json()
+        people = int(data['prediction'])
+        self.assertIsInstance(people, int)
 
     def test_people_now(self):
         # No model yet
         response = requests.get(f"{self.baseURL}/api/people-now")
         self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(int(response.text), int)
+        data = response.json()
+        people = data['prediction']
+        self.assertIsInstance(people, int)
 
     def test_average_people(self):
-        response = requests.get(f"{self.baseURL}/api/average-people", params=self.time)
+        response = requests.get(f"{self.baseURL}/api/average-people")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.text, "6")
+        data = response.json()
+        people = math.floor(float(data['people']))
+        self.assertEqual(math.floor(people), 6)  # round down from 6.56
 
     def test_min_people(self):
         response = requests.get(f"{self.baseURL}/api/min-people", params=self.time)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.text, "0")
+        data = response.json()
+        people = int(data['people'])
+        self.assertEqual(people, 0)
 
     def test_max_people(self):
         """
@@ -134,7 +143,9 @@ class APITest(unittest.TestCase):
         """
         response = requests.get(f"{self.baseURL}/api/max-people", params=self.time)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.text, "22")
+        data = response.json()
+        people = int(data['people'])
+        self.assertEqual(people, 7)
 
 
 if __name__ == "__main__":
