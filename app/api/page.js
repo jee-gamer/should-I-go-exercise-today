@@ -8,7 +8,7 @@ export default function Api() {
         <div id="main" className="flex flex-col items-center justify-center min-w-full">
             <span className={`text-9xl ${CaveatBrush_font.className} mt-10 text-outline`}> APIs </span>
             <span className={`inline-block text-left text-4xl ${WinkySans_font.className} mt-20 w-5/6`}> Base URL: http://localhost:3000/api </span>
-            <span className={`inline-block text-left text-4xl ${WinkySans_font.className} mt-20 w-5/6`}> Time Inteval: [Dawn (7-9), Morning (9-11), Noon (11-13), Afternoon (13-15), Late Afternoon (15-17)] </span>
+            <span className={`inline-block text-left text-4xl ${WinkySans_font.className} mt-20 w-5/6`}> Time Inteval: [Dawn (7-9), Morning (9-11), Noon (11-13), Afternoon (13-15), Late-Afternoon (15-17)] </span>
 
             <span className={`inline-block text-left text-4xl ${PM_font.className} mt-20 w-5/6`}> Request: </span>
 

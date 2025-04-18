@@ -128,7 +128,7 @@ class APITest(unittest.TestCase):
         Test the max people endpoint with absolute value
         """
         params = {
-            'time': 'Dawn'
+            'time': 'dawn'
         }
         response = requests.get(f"{self.baseURL}/api/max-people", params=params)
         self.assertEqual(response.status_code, 200)

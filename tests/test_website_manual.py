@@ -33,7 +33,7 @@ class SeleniumTest(unittest.TestCase):
 
         self.assertTrue(len(description) > 10)
 
-        time.sleep(7)
+        time.sleep(12)
 
     def test_02_home_page_with_time(self):
         """
@@ -88,37 +88,9 @@ class SeleniumTest(unittest.TestCase):
 class APITest(unittest.TestCase):
     def setUp(self):
         self.baseURL = "http://localhost:3000/"
-
-    def test_api(self):
-        """
-        Test that the api will return numerical values or json based on the api chosen
-        You will need to input the location or use your location
-        """
-
-        response = requests.get(f"{self.baseURL}/api/suggestion")
-        data = response.json()
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(data['suggestion'], ["yes", "no", "maybe"])
-
-        response = requests.get(f"{self.baseURL}/api/people-at")
-        self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(int(response.text), int)
-
-        response = requests.get(f"{self.baseURL}/api/people-now")
-        self.assertEqual(response.status_code, 200)
-        self.assertIsInstance(int(response.text), int)
-
-        response = requests.get(f"{self.baseURL}/api/average-people")
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.text, "6")  # rounded down from 6.5634
-
-        response = requests.get(f"{self.baseURL}/api/max-people")
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.text, "39")
-
-        response = requests.get(f"{self.baseURL}/api/min-people")
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.text, "0")
+        self.time = {
+            'time': 'Dawn'
+        }
 
     def test_suggestion(self):
         """
@@ -134,16 +106,35 @@ class APITest(unittest.TestCase):
         self.assertIn(data['suggestion'].lower(), ["yes", "no", "maybe"])
         self.assertTrue(len(data['description']) > 20)
 
+    def test_people_at(self):
+        # No model yet
+        response = requests.get(f"{self.baseURL}/api/people-at", params=self.time)
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(int(response.text), int)
+
+    def test_people_now(self):
+        # No model yet
+        response = requests.get(f"{self.baseURL}/api/people-now")
+        self.assertEqual(response.status_code, 200)
+        self.assertIsInstance(int(response.text), int)
+
+    def test_average_people(self):
+        response = requests.get(f"{self.baseURL}/api/average-people", params=self.time)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.text, "6")
+
+    def test_min_people(self):
+        response = requests.get(f"{self.baseURL}/api/min-people", params=self.time)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.text, "0")
+
     def test_max_people(self):
         """
         Test the max people endpoint with absolute value
         """
-        params = {
-            'time': 'Dawn'
-        }
-        response = requests.get(f"{self.baseURL}/api/max-people", params=params)
+        response = requests.get(f"{self.baseURL}/api/max-people", params=self.time)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.text, "5??")
+        self.assertEqual(response.text, "22")
 
 
 if __name__ == "__main__":

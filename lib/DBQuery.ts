@@ -88,6 +88,7 @@ class DBQuery {
         }
         fieldString = fields.map(f => `${method.toUpperCase()}(${f}) AS ${f}`).join(", ");
         let q = `SELECT ${fieldString} FROM`;
+        time = time?.toLowerCase()
         if (INTERVAL[time]) {
             q += ` (SELECT ${fields.join(", ")}, timestamp FROM yearProject WHERE TIME(timestamp) BETWEEN '09:00:00' AND '11:00:00') s;`
         } else {
