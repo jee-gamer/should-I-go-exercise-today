@@ -132,10 +132,7 @@ class APITest(unittest.TestCase):
         """
         Test the max people endpoint with absolute value
         """
-        params = {
-            'time': 'Dawn'
-        }
-        response = requests.get(f"{self.baseURL}/api/max-people", params=params)
+        response = requests.get(f"{self.baseURL}/api/max-people", params=self.time)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.text, "22")
 
