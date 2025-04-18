@@ -40,7 +40,7 @@ class LinearRegression {
         }
         const prediction: number = this.regressionModel.predict([data.temp_c, data.humidity])[0];
         const percentage: number = prediction / this.maxPeople;
-        return {prediction: prediction, percentage: percentage};
+        return {prediction: Math.floor(prediction), percentage: percentage};
     }
 }
 

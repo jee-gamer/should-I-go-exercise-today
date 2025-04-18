@@ -3,19 +3,16 @@ import {INTERVAL} from "@/lib/INTERVAL";
 class WeatherAPI {
     private static instance: WeatherAPI;
     private readonly key: string;
-    private readonly baseURL = "http://api.weatherapi.com/v1/forecast.json"
+    private readonly baseURL: string;
 
-    private constructor(key: string) {
-        this.key = key
+    private constructor(key: string, baseURL: string) {
+        this.key = key;
+        this.baseURL = baseURL;
     }
 
-    static getInstance() {
+    static getInstance(apiKey: string, baseURL: string) {
         if(!WeatherAPI.instance) {
-            const key: string = process.env.API_KEY;
-            if (!key) {
-                throw new Error("No API_KEY variable defined in .env.local file")
-            }
-            WeatherAPI.instance = new WeatherAPI(key);
+            WeatherAPI.instance = new WeatherAPI(apiKey, baseURL);
         }
         return WeatherAPI.instance;
     }
@@ -54,4 +51,10 @@ class WeatherAPI {
     }
 }
 
-export default WeatherAPI.getInstance()
+
+const key: string = process.env.API_KEY;
+const baseURL: string = "http://api.weatherapi.com/v1/forecast.json";
+if (!key) {
+    throw new Error("No API_KEY variable defined in .env.local file")
+}
+export default WeatherAPI.getInstance(key, baseURL);
