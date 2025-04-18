@@ -157,8 +157,8 @@ export default function Home() {
 
 				<div className="flex-width">
 					<div className="attribute-box">
-						<span className={`${CaveatBrush_font.className} font-bold text-3xl 4xl:text-5xl`}>😶‍🌫 PM 2.5 (μg/m3)</span>
-						<span id="pm25" className={`${ WinkySans_font.className } attribute-text text-gray-500`}>8</span>
+						<span className={`${CaveatBrush_font.className} font-bold text-3xl 4xl:text-5xl`}>😶‍🌫 PM 2.5 (AQI)</span>
+						<span id="pm25" className={`${ WinkySans_font.className } attribute-text text-gray-500`}>34</span>
 					</div>
 					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Perfectly fine to go out</span>
 				</div>
