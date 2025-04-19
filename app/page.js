@@ -14,17 +14,17 @@ export default function Home() {
 	const [tempColor, setTempColor] = useState("");
 	const [suggestions, setSuggestions] = useState({suggestion: "hmm?", description: "Whoops. It seems like the suggestion isn't loaded yet"});
 	const [time, setTime] = useState("now");
-	const baseURL = process.env.BASE_URL;
+	const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 	useEffect(() => {
 		const get_suggestion = async () => {
-			await axios.get(`${baseURL}/api/suggestion`)
+			await axios.get(`/api/suggestion`)
 				.then((response) => {
 				setSuggestions(response.data);
 			})
 		}
 		get_suggestion();
-	}, [suggestions, baseURL]);
+	}, [time]);
 
 	useEffect(() => {
 		if (temp <= 26) setTempColor("text-blue-500");
