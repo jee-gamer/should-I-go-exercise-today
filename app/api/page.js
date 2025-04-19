@@ -1,5 +1,7 @@
 import '@/app/globals.css'
 import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export default function Api() {
     return (
