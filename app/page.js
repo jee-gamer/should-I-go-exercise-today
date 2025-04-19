@@ -14,12 +14,14 @@ export default function Home() {
 	const [tempColor, setTempColor] = useState("");
 	const [suggestions, setSuggestions] = useState({suggestion: "hmm?", description: "Whoops. It seems like the suggestion isn't loaded yet"});
 	const [time, setTime] = useState("now");
-	const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 	useEffect(() => {
 		const get_suggestion = async () => {
-			await axios.get(`/api/suggestion`)
+			await axios.get(`/api/suggestion`, {
+				params: {time: time},
+			})
 				.then((response) => {
+					console.log(response.data);
 				setSuggestions(response.data);
 			})
 		}
@@ -133,7 +135,7 @@ export default function Home() {
 					</div>
 					<div name="button" className="flex-width-time h-full">
 						<button className={`time-button bg-gradient-to-r from-orange-500 to-blue-200`}
-										onClick={() => setTime("Late Afternoon")}>
+										onClick={() => setTime("Late-Afternoon")}>
 							<span className={`${CaveatBrush_font.className} text-blue-900`}>Late Afternoon</span>
 						</button>
 						<span className={`text-4xl ${WinkySans_font.className} text-gray-500`}>15:00 - 17:00</span>
