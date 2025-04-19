@@ -24,6 +24,7 @@ class WeatherAPI {
         ) {
         const now = new Date(new Date().toLocaleString('en-US', {timeZone: 'Asia/Bangkok'}));
         let hour: number;
+        time = time.toLowerCase()
         if (!time) {
             hour = now.getHours();
         } else if (INTERVAL[time]) {

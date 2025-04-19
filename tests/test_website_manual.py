@@ -66,8 +66,6 @@ class SeleniumTest(unittest.TestCase):
         self.assertNotEqual(temperature, new_temperature)
         self.assertNotEqual(people, new_people)
 
-        time.sleep(5)
-
     def test_03_home_page_api_button(self):
         driver = self.driver
 
@@ -79,7 +77,7 @@ class SeleniumTest(unittest.TestCase):
         time.sleep(2)
         self.actions.release().perform()
 
-        time.sleep(2)
+        time.sleep(3)
         current_url = driver.current_url
         self.assertEqual(f"{self.baseURL}/api", current_url)
 
@@ -108,7 +106,6 @@ class APITest(unittest.TestCase):
         self.assertTrue(len(data['description']) > 20)
 
     def test_people_at(self):
-        # No model yet
         response = requests.get(f"{self.baseURL}/api/people-at", params=self.time)
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -116,7 +113,6 @@ class APITest(unittest.TestCase):
         self.assertIsInstance(people, int)
 
     def test_people_now(self):
-        # No model yet
         response = requests.get(f"{self.baseURL}/api/people-now")
         self.assertEqual(response.status_code, 200)
         data = response.json()

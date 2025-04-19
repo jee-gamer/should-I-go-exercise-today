@@ -1,5 +1,4 @@
 import '@/app/globals.css'
-
 import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 
 export default function Api() {
