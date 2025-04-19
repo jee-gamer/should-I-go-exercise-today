@@ -10,8 +10,11 @@ import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-	const [temp, setTemp] = useState(35); // temp here
+	const [temp, setTemp] = useState(0); // temp here
 	const [tempColor, setTempColor] = useState("");
+	const [humid, setHumid] = useState(0); // temp here
+	const [pm25, setPm25] = useState(0); // temp here
+	const [people, setPeople] = useState(0); // temp here
 	const [suggestions, setSuggestions] = useState({suggestion: "hmm?", description: "Whoops. It seems like the suggestion isn't loaded yet"});
 	let [time, setTime] = useState("now");
 
@@ -29,6 +32,8 @@ export default function Home() {
 			})
 		}
 		get_suggestion();
+
+		// Add getting weather attribute and setting them here
 	}, [time]);
 
 	useEffect(() => {
@@ -164,7 +169,7 @@ export default function Home() {
 					<div className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title`}>💦 Humidity</span>
 						<div className="flex flex-row items-end text-blue-500">
-							<span id="humidity" className={`${ WinkySans_font.className } attribute-text`}>80</span>
+							<span id="humidity" className={`${ WinkySans_font.className } attribute-text`}>{ humid }</span>
 							<span className={`${ WinkySans_font.className } text-2xl xl:text-6xl mb-4`}>%</span>
 						</div>
 					</div>
@@ -174,7 +179,7 @@ export default function Home() {
 				<div className="flex-width">
 					<div className="attribute-box">
 						<span className={`${CaveatBrush_font.className} font-bold text-3xl 4xl:text-5xl`}>😶‍🌫 PM 2.5 (AQI)</span>
-						<span id="pm25" className={`${ WinkySans_font.className } attribute-text text-gray-500`}>34</span>
+						<span id="pm25" className={`${ WinkySans_font.className } attribute-text text-gray-500`}>{ pm25 }</span>
 					</div>
 					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Perfectly fine to go out</span>
 				</div>
@@ -183,7 +188,7 @@ export default function Home() {
 					<div id="people" className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title`}>👨‍👨 People</span>
 						<div className="flex flex-row items-end">
-							<span id="people" className={`${ WinkySans_font.className } attribute-text`}>24</span>
+							<span id="people" className={`${ WinkySans_font.className } attribute-text`}>{ people }</span>
 							<span className={`${ WinkySans_font.className } text-2xl xl:text-6xl mb-4`}>%</span>
 						</div>
 					</div>
