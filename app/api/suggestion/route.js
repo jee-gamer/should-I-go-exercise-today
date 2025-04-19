@@ -8,7 +8,17 @@ export async function GET(req) {
   the result will be unavailable.
   example use: baseurl/api/suggestion; returns suggestion and description of current time.
   example use: baseurl/api/suggestion?time=dawn; returns suggestion and description at 8 AM of today
-  return: { suggestion: string, description: string }
+  return: {
+    suggestion: string,
+    desc1: string,
+    desc2: string,
+    weather: {
+      temperature: {value: number, desc: string},
+      humidity: {value: number, desc: string},
+      pm2_5: {value: number, desc: string},
+      people: {value: number, desc: string}
+    } | null
+  }
   `
   const searchParam = new URLSearchParams(new URL(req.url).search);
   let time = searchParam.get("time");

@@ -28,7 +28,7 @@ class DBQuery {
         return DBQuery.instance;
     }
 
-    static mapInterval(): string | null {
+    mapInterval(): string | null {
         const now = new Date(new Date().toLocaleString('en-US', {timeZone: 'Asia/Bangkok'})).getHours();
         return (7 <= now) && (now < 9) ? "dawn" :
             (9 <= now) && (now < 11) ? "morning" :

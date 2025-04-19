@@ -47,7 +47,10 @@ class WeatherAPI {
         } catch (error) {
             return null;
         }
-        return json.forecast.forecastday[0].hour[0];
+        return {
+            weather: json.forecast.forecastday[0].hour[0],
+            pm2_5: json.current.air_quality.pm2_5
+        };
     }
 }
 
