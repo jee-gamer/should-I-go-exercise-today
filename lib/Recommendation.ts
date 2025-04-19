@@ -53,7 +53,7 @@ class Recommendation {
         result.weather = {
             temperature: {value: hourForecast.temp_c, desc: this.temperatureDesc(hourForecast.temp_c)},
             humidity: {value: hourForecast.humidity, desc: this.humidityDesc(hourForecast.humidity)},
-            pm2_5: {value: data.pm2_5, desc: this.pm2_5Desc(data.pm2_5)},
+            pm2_5: {value: Math.round(data.pm2_5), desc: this.pm2_5Desc(data.pm2_5)},
             people: {value: peoplePredict.percentage, desc: this.peopleDesc(peoplePredict.percentage)}
         }
         if (hourForecast.precip_mm >= 1) {
