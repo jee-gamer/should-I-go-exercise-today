@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import '@/app/globals.css'
+import axios from "axios";
 
 import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 
@@ -11,8 +12,19 @@ import { useEffect, useState } from "react";
 export default function Home() {
 	const [temp, setTemp] = useState(35); // temp here
 	const [tempColor, setTempColor] = useState("");
-
+	const [suggestions, setSuggestions] = useState({suggestion: "hmm?", description: "Whoops. It seems like the suggestion isn't loaded yet"});
 	const [time, setTime] = useState("now");
+	const baseURL = process.env.BASE_URL;
+
+	useEffect(() => {
+		const get_suggestion = async () => {
+			await axios.get(`${baseURL}/api/suggestion`)
+				.then((response) => {
+				setSuggestions(response.data);
+			})
+		}
+		get_suggestion();
+	}, [suggestions, baseURL]);
 
 	useEffect(() => {
 		if (temp <= 26) setTempColor("text-blue-500");
@@ -57,15 +69,14 @@ export default function Home() {
 						 className="flex flex-col items-center justify-items-start gap-16 m-30 mt-10 min-w-[400px] min-h-[500px] max-h-[500px] text-black">
 					<div id="yesno"
 							 className={ `flex flex-col gap-16 text-9xl mt-10 text-outline ${ PM_font.className }` }>
-						YES
+						{suggestions.suggestion.toUpperCase()}
 					</div>
 					<div id="general"
 							 className={ `flex flex-col items-center justify-center gap-16 max-w-100 text-3xl ${ WinkySans_font.className }` }>
-						The mild weather means you won’t overheat, and the breeze keeps you
-						feeling fresh.
+						{suggestions.description}
 						<br/>
 						<br/>
-						It’s a breezy, slightly overcast afternoon with a cool temperature.
+						{suggestions.description}
 					</div>
 				</div>
 
