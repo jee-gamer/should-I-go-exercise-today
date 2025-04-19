@@ -2,15 +2,12 @@ import WeatherAPI from "@/lib/WeatherAPI";
 
 class Recommendation {
     private static instance: Recommendation;
-    private readonly key: string;
 
-    private constructor(key: string) {
-        this.key = key
-    }
+    private constructor() {}
 
-    public static getInstance(apiKey: string) {
+    public static getInstance() {
         if (!Recommendation.instance) {
-            Recommendation.instance = new Recommendation(apiKey);
+            Recommendation.instance = new Recommendation();
         }
         return Recommendation.instance;
     }
@@ -69,24 +66,7 @@ class Recommendation {
         result.suggestion = "Maybe";
         return result;
     }
-
-    public recommendTemp() {
-
-    }
-
-    public recommendHumidity() {
-
-    }
-
-    public recommendPrecip() {
-
-    }
-
-    public recommendPM25() {
-
-    }
 }
 
 
-const key: string = process.env.API_KEY;
-export default Recommendation.getInstance(key);
+export default Recommendation.getInstance();

@@ -15,18 +15,20 @@ interface Schema extends RowDataPacket {
 
 class DBQuery {
     private static instance: DBQuery;
+    private readonly pool: Pool;
 
-    private constructor() {
+    private constructor(dbPool: Pool) {
+        this.pool = dbPool;
     }
 
-    static getInstance() {
+    static getInstance(dbPool: Pool) {
         if (!DBQuery.instance) {
-            DBQuery.instance = new DBQuery();
+            DBQuery.instance = new DBQuery(dbPool);
         }
-        return DBQuery.instance
+        return DBQuery.instance;
     }
 
-    static mapInterval() {
+    static mapInterval(): string | null {
         const now = new Date(new Date().toLocaleString('en-US', {timeZone: 'Asia/Bangkok'})).getHours();
         return (7 <= now) && (now < 9) ? "dawn" :
             (9 <= now) && (now < 11) ? "morning" :
@@ -47,7 +49,7 @@ class DBQuery {
         }
         q += ";";
         try {
-            const [result] = await pool.query<Schema[]>(q);
+            const [result] = await this.pool.query<Schema[]>(q);
             return {field: field, result: result.map(n => n[field])};
         } catch (error) {
             return {error_message: error}
@@ -72,7 +74,7 @@ class DBQuery {
         }
         q += ";";
         try {
-            const [result] = await pool.query<Schema[]>(q);
+            const [result] = await this.pool.query<Schema[]>(q);
             return {fields: fields, result: result.map(n => fields.map(f => n[f]))};
         } catch (error) {
             return {error_message: error}
@@ -93,7 +95,7 @@ class DBQuery {
             q += ` yearProject;`;
         }
         try {
-            const [result] = await pool.query<Schema[]>(q);
+            const [result] = await this.pool.query<Schema[]>(q);
             const returned = {}
             for (const field of fields) {
                 returned[field] = result[0][field];
@@ -106,4 +108,4 @@ class DBQuery {
 }
 
 
-export default DBQuery.getInstance();
+export default DBQuery.getInstance(pool);
