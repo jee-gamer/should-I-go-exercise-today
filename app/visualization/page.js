@@ -31,7 +31,7 @@ export default function Visualization() {
 	useEffect(() => {
 		const fetchAllData = async () => {
 			const res = await axios.get('/api/all-metrics');
-			const { people, temperature, humidity, pm25, precip } = res.data;
+			const { people, temperature, humidity, pm25, precip_mm } = res.data;
 
 			const process = (metric, setState) => {
 				const combined = people.map((person, index) => ({
@@ -53,7 +53,7 @@ export default function Visualization() {
 			process(temperature, setAllTemp);
 			process(humidity, setAllHumid);
 			process(pm25, setAllPm25);
-			process(precip, setAllPrecip);
+			process(precip_mm, setAllPrecip);
 		};
 
 		fetchAllData();

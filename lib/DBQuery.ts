@@ -57,17 +57,17 @@ class DBQuery {
         }
     }
 
-    async getFields(fields: string[], time?: string): Promise<{
-        fields?: string[],
-        result?: number[][],
-        error_message?: string
-    }> {
+    async getFields(fields: string[], time?: string, fieldFormat?: boolean){
         let fieldString: string;
         if (!fields || fields.length == 0) {
             fieldString = "*";
             fields = ["id", "timestamp", "light", "temperature", "humidity", "people", "precip_mm", "PM25"]
         } else {
             fieldString = fields.join(", ") + ", timestamp";
+        }
+        const result = {};
+        for (const field of fields) {
+            result[field] = [];
         }
         let q = `SELECT ${fieldString} FROM yearProject`
         time = time?.toLowerCase();
@@ -76,8 +76,17 @@ class DBQuery {
         }
         q += ";";
         try {
-            const [result] = await this.pool.query<Schema[]>(q);
-            return {fields: fields, result: result.map(n => fields.map(f => n[f]))};
+            const [qResult] = await this.pool.query<Schema[]>(q);
+            const all = qResult.map(n => fields.map(f => n[f]));
+            if (!fieldFormat) {
+                return {fields: fields, result: all}
+            }
+            for (const row of all) {
+                for (let i = 0; i < row.length; i++) {
+                    result[fields[i]].push(row[i]);
+                }
+            }
+            return result;
         } catch (error) {
             return {error_message: error}
         }
