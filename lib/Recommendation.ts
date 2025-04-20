@@ -62,7 +62,7 @@ class Recommendation {
             return result;
         }
         if (hourForecast.temp_c > 34) {
-            result.desc1 = "It's too hot outside, you might be melt or dehydrated easily.";
+            result.desc1 = "It's too hot outside, you will get dehydrated easily.";
             result.desc2 = "Being outside in such heat can increase the risk of heat exhaustion or dehydration, especially during midday hours.";
             return result;
         }
@@ -107,10 +107,10 @@ class Recommendation {
 
     temperatureDesc(temperature: number) {
         if (temperature > 34) {
-            return "It's too hot outside, you might be melt or dehydrated easily.";
+            return "It's too hot outside.";
         }
         if (temperature < 10) {
-            return "It's cold outside, you might be frozen if you go outdoor.";
+            return "It's extremely cold outside.";
         }
         if (29 <= temperature && temperature <= 34) {
             return "It's warm to hot outside, stay hydrated and avoid exposing to direct sunlight.";
@@ -123,12 +123,12 @@ class Recommendation {
             return "The air is very humid, you might feel hotter than it actually is.";
         }
         if (humidity < 25) {
-            return "The air is very dry, your skin will dry and might irritate.";
+            return "The air is very dry, your skin will dry and get irritated.";
         }
         if (30 <= humidity && humidity <= 60) {
             return "Humidity is in good condition.";
         }
-        return "Humidity is not in good or bad condition, it's fair and manageable condition.";
+        return "Humidity is not bad, it's manageable.";
     }
 
     pm2_5Desc(pm2_5: number) {
@@ -149,15 +149,15 @@ class Recommendation {
 
     peopleDesc(peoplePercentage: number) {
         if (peoplePercentage >= 75) {
-            return "Most people might go outdoor."
+            return "Most people are going outdoor."
         }
         if (peoplePercentage >= 50) {
-            return "Fair amount of people might exercising outdoor."
+            return "Fair amount of people are exercising outdoor."
         }
         if (peoplePercentage >= 25) {
-            return "There might be people doing outdoor activity but not that much."
+            return "Not a lot of people is going to exercise outdoor."
         }
-        return "Barely anyone might go outside."
+        return "Barely anyone is going outside."
     }
 }
 
