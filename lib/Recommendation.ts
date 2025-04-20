@@ -141,6 +141,40 @@ class Recommendation {
         return result;
     }
 
+    async heatstroke(
+        time?: string,
+        lat?: string,
+        lon?: string
+    ): Promise<{ heat_index: number, level: string, desc: string }> {
+        if (!time || time == "now") {
+            time = DBQuery.mapInterval();
+        }
+        if (!INTERVAL[time]) {
+        }
+        time = time?.toLowerCase();
+        const data = (await WeatherAPI.fetchData(time, lat, lon));
+        if (!data) {
+            return {heat_index: 0, level: "unavailable", desc: "unavailable"};
+        }
+        const weather = data.weather;
+        const hi = (-8.78469475556) + (1.61139411*weather.temp_c) + (2.33854883889*weather.humidity) +
+            (-0.14611605*weather.temp_c*weather.humidity) + (-0.012308094*weather.temp_c**2) +
+            (-0.0164248277778*weather.humidity**2) + (0.002211732*(weather.temp_c**2)*weather.humidity) +
+            (0.00072546*weather.temp_c*weather.humidity**2) + (-0.000003582*(weather.temp_c**2)*weather.humidity**2)
+        const breakpoints = [
+            {condition: hi > 54, level: "Extreme danger", desc: "Heat stroke is imminent."},
+            {condition: hi > 41, level: "Danger", desc: "Heat cramps and heat exhaustion are likely; heat stroke is probable with continued activity."},
+            {condition: hi > 32, level: "Extreme caution", desc: "Heat cramps and heat exhaustion are possible. Continuing activity could result in heat stroke."},
+            {condition: hi > 27, level: "Caution", desc: "Fatigue is possible with prolonged exposure and activity. Continuing activity could result in heat cramps."}
+        ]
+        for (const breakpoint of breakpoints) {
+            if (breakpoint.condition) {
+                return {heat_index: hi, level: breakpoint.level, desc: breakpoint.desc}
+            }
+        }
+        return {heat_index: hi, level: "Safe", desc: "A little to no possible heatstroke."}
+    }
+
     temperatureDesc(temperature: number) {
         if (temperature > 34) {
             return "It's too hot outside.";
