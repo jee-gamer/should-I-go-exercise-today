@@ -18,7 +18,7 @@ class LinearRegression {
         this.regressionModel = new MultivariateLinearRegression(X, Y)
     }
 
-    static async getInstance() {
+    public static async getInstance() {
         if (!LinearRegression.instance) {
             const data = await DBQuery.getFields(["temperature", "humidity", "people"]);
             if (!data.error_message) {
@@ -45,5 +45,5 @@ class LinearRegression {
 }
 
 
-export default await LinearRegression.getInstance();
+export default LinearRegression;
 

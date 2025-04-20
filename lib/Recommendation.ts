@@ -49,7 +49,8 @@ class Recommendation {
         const data = await WeatherAPI.fetchData(time, lat, lon);
         const hourForecast = data.weather;
         result.suggestion = "No";
-        const peoplePredict = await LinearRegression.predict(time, lat, lon)
+        const linearRegression = await LinearRegression.getInstance();
+        const peoplePredict = await linearRegression.predict(time, lat, lon)
         result.weather = {
             temperature: {value: hourForecast.temp_c, desc: this.temperatureDesc(hourForecast.temp_c)},
             humidity: {value: hourForecast.humidity, desc: this.humidityDesc(hourForecast.humidity)},

@@ -14,7 +14,8 @@ export async function GET(req) {
   let time = searchParam.get("time");
   let lat = searchParam.get("lat");
   let lon = searchParam.get("lon");
-  const data = await LinearRegression.predict(time, lat, lon);
+  const linearRegression = await LinearRegression.getInstance()
+  const data = await linearRegression.predict(time, lat, lon);
   return new Response(JSON.stringify(data), {
     status: data.prediction? 200 : 404,
     headers: { 'Content-Type': 'application/json' },
