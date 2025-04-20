@@ -9,8 +9,9 @@ import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 import axios from "axios";
 
 export default function Visualization() {
-	const [time, setTime] = useState("Dawn");
-	const [weather, setWeather] = useState("Temperature");
+	let [time, setTime] = useState("Dawn");
+	let [weather, setWeather] = useState("Temperature");
+	let [customGraph, setCustomGraph] = useState({});
 
 	useEffect(() => {
 		console.log(`Changed time to ${time}`)
@@ -26,72 +27,75 @@ export default function Visualization() {
 	const [allPrecip, setAllPrecip] = useState({});
 
 	useEffect(() => {
-		const getData = async () => {
-			const peopleRes = await axios.get('/api/all-people');
-			const tempRes = await axios.get('/api/all-temperature');
+		const fetchAllData = async () => {
+			const res = await axios.get('/api/all-metrics');
+			const { people, temperature, humidity, pm25, precip } = res.data;
 
-			const people = peopleRes.data.result;
-			const temps = tempRes.data.result;
+			const process = (metric, setState) => {
+				const combined = people.map((person, index) => ({
+					person,
+					value: metric[index]
+				}));
 
-			// Pair people and temps together by index
-			const combined = people.map((person, index) => ({
-				person,
-				temp: temps[index]
-			}));
+				combined.sort((a, b) => a.value - b.value);
 
-			// Sort by temperature (ascending)
-			combined.sort((a, b) => a.temp - b.temp);
+				const sortedPeople = combined.map(item => item.person);
+				const sortedValues = combined.map(item => item.value);
 
-			// Split them back into separate arrays
-			const sortedPeople = combined.map(item => item.person);
-			const sortedTemps = combined.map(item => item.temp);
+				setState({
+					people: sortedPeople,
+					values: sortedValues
+				});
+			};
 
-			setAllTemp({
-				temp: sortedTemps,
-				people: sortedPeople
-			});
+			process(temperature, setAllTemp);
+			process(humidity, setAllHumid);
+			process(pm25, setAllPm25);
+			process(precip, setAllPrecip);
 		};
 
-		getData();
+		fetchAllData();
 	}, []);
 
 
 	useEffect(() => {
+		let format_time = ""
+		let format_weather = ""
+		if (time === "Late Afternoon") {
+			format_time = "late-afternoon";
+		}
+		if (weather === "Precip_mm") {
+			format_weather = "precip";
+		} else if (weather === "PM 2.5") {
+			format_weather = "pm25";
+		}
+		format_weather = format_weather.toLowerCase();
+		const getData = async () => {
+			const [weatherRes, peopleRes] = await Promise.all([
+				axios.get(`/api/all-${format_weather}`, { params: { format_time } }),
+				axios.get('/api/all-people', { params: { format_time } })
+			]);
 
-		const getAllTemp = async () => {
-			await axios.get('/api/all-temperature')
-				.then((response) => {
-					setAllTemp(response.data.result);
-				});
-		};
+			const people = peopleRes.data.result;
+			const metrics = weatherRes.data.result;
 
-		const getAllHumid = async () => {
-			await axios.get('/api/all-humidity')
-				.then((response) => {
-					setAllHumid(response.data.result);
-				});
-		};
+			const combined = people.map((person, index) => ({
+				person,
+				value: metrics[index]
+			}));
 
-		const getAllPm25 = async () => {
-			await axios.get('/api/all-pm25')
-				.then((response) => {
-					setAllPm25(response.data.result);
-				});
-		};
+			combined.sort((a, b) => a.value - b.value);
 
-		const getAllPrecip = async () => {
-			await axios.get('/api/all-precip')
-				.then((response) => {
-					setAllPrecip(response.data.result);
-				});
-		};
+			const sortedPeople = combined.map(item => item.person);
+			const sortedValues = combined.map(item => item.value);
 
-		getAllTemp();
-		getAllHumid();
-		getAllPm25();
-		getAllPrecip();
-	}, []);
-
+			setCustomGraph({
+				people: sortedPeople,
+				values: sortedValues
+			});
+		}
+		getData();
+	}, [time, weather]);
 
 	return (
 		<div className="flex flex-col items-center justify-items-center min-h-fit h-screen sm:p-20 font-[family-name:var(--font-geist-sans)] text-black notebook-wo-line">
@@ -102,7 +106,7 @@ export default function Visualization() {
 				<div id="graph1" className="flex flex-row items-start justify-center w-5/6 h-[30vh] gap-16">
 					<div className="w-1/2 h-full">
 						<LineChart
-							xData={allTemp.temp}
+							xData={allTemp.values}
 							yData={allTemp.people}
 							xLabel="Temperature (°C)"
 							yLabel="People"
@@ -111,8 +115,8 @@ export default function Visualization() {
 					</div>
 					<div className="w-1/2 h-full">
 						<LineChart
-							xData={[1]}
-							yData={[1]}
+							xData={allHumid.values}
+							yData={allHumid.people}
 							xLabel="Humidity (%)"
 							yLabel="People"
 							title="Humidity"
@@ -123,18 +127,18 @@ export default function Visualization() {
 				<div id="graph2" className="flex flex-row items-start justify-center w-5/6 h-[30vh] gap-16 mt-10 ">
 					<div className="w-1/2 h-full">
 						<LineChart
-							xData={['25', '31', '32', '33', '40']}
-							yData={[12, 19, 3, 5, 8]}
-							xLabel="Temperature (°C)"
+							xData={allPrecip.values}
+							yData={allPrecip.people}
+							xLabel="Precip (mm)"
 							yLabel="People"
 							title="Precip_mm"
 						/>
 					</div>
 					<div className="w-1/2 h-full">
 						<LineChart
-							xData={['25', '31', '32', '33', '40']}
-							yData={[12, 19, 3, 5, 8]}
-							xLabel="Temperature (°C)"
+							xData={allPm25.values}
+							yData={allPm25.people}
+							xLabel="PM 2.5 (µg/m³)"
 							yLabel="People"
 							title="PM 2.5"
 						/>
@@ -155,7 +159,7 @@ export default function Visualization() {
 					</label>
 					<label className="select">
 						<span className="label">Weather attribute</span>
-						<select>
+						<select value={weather} onChange={e => setWeather(e.target.value)}>
 							<option>Temperature</option>
 							<option>Humidity</option>
 							<option>Precip_mm</option>
@@ -167,11 +171,11 @@ export default function Visualization() {
 				<div
 					className="flex flex-row items-center justify-center w-5/6 h-[50vh] gap-16 mt-20 border">
 					<LineChart
-						xData={['25', '31', '32', '33', '40']}
-						yData={[12, 19, 3, 5, 8]}
-						xLabel="Temperature (°C)"
+						xData={customGraph.values}
+						yData={customGraph.people}
+						xLabel={weather}
 						yLabel="People"
-						title="PM 2.5"
+						title={time}
 					/>
 				</div>
 
