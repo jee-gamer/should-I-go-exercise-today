@@ -46,6 +46,10 @@
   @apply text-5xl xl:text-9xl;
 }
 
+.attribute-desc {
+  @apply text-3xl 4xl:text-3xl
+}
+
 .flex-width {
   @apply flex flex-col items-center justify-center w-1/6
 }

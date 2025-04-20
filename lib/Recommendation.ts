@@ -40,7 +40,7 @@ class Recommendation {
             desc2: "unavailable",
             weather: null
         }
-        if (!time) {
+        if (!time || time == "now") {
             time = DBQuery.mapInterval();
         }
         if (!INTERVAL[time]) {
@@ -72,8 +72,8 @@ class Recommendation {
             return result;
         }
         if (29 <= hourForecast.temp_c && hourForecast.temp_c <= 34) {
-            result.desc1 = "It's warm to hot outside, stay hydrated and avoid exposing to direct sunlight.";
-            result.desc2 = "It’s manageable, but you should wear light clothing, use sunscreen, and avoid strenuous activities during peak sun hours.";
+            result.desc1 = "It's a little hot outside, stay hydrated and avoid exposing to direct sunlight.";
+            result.desc2 = "It’s manageable, but you should wear light clothing, use sunscreen, and avoid demanding activities during peak sun hours.";
             result.suggestion = "Maybe";
             return result;
         }

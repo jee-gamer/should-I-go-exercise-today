@@ -10,12 +10,12 @@ import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-	const [temp, setTemp] = useState(0); // temp here
+	const [temp, setTemp] = useState({value: 0, desc: "Not loaded"}); // temp here
 	const [tempColor, setTempColor] = useState("");
-	const [humid, setHumid] = useState(0); // temp here
-	const [pm25, setPm25] = useState(0); // temp here
-	const [people, setPeople] = useState(0); // temp here
-	const [suggestions, setSuggestions] = useState({suggestion: "hmm?", description: "Whoops. It seems like the suggestion isn't loaded yet"});
+	const [humid, setHumid] = useState({value: 0, desc: "Not loaded"}); // temp here
+	const [pm25, setPm25] = useState({value: 0, desc: "Not loaded"}); // temp here
+	const [people, setPeople] = useState({value: 0, desc: "Not loaded"}); // temp here
+	const [suggestions, setSuggestions] = useState({suggestion: "hmm?", desc1: "Whoops. It seems like the suggestion isn't loaded yet", desc2: "Nothing to see here"});
 	let [time, setTime] = useState("now");
 
 	useEffect(() => {
@@ -28,18 +28,33 @@ export default function Home() {
 			})
 				.then((response) => {
 					console.log(response.data);
-				setSuggestions(response.data);
+					const { suggestion, desc1, desc2, weather } = response.data;
+					setSuggestions({
+						suggestion: suggestion,
+						desc1: desc1,
+						desc2: desc2,
+					});
+
+					setTemp(weather.temperature);
+					setHumid(weather.humidity);
+					setPm25(weather.pm2_5);
+					setPeople(weather.people);
 			})
 		}
-		get_suggestion();
+
+		try {
+			get_suggestion();
+		} catch (error) {
+			console.log(`Failed to get suggestion ${error}`);
+		}
 
 		// Add getting weather attribute and setting them here
 	}, [time]);
 
 	useEffect(() => {
-		if (temp <= 26) setTempColor("text-blue-500");
-		else if (temp <= 30) setTempColor("text-yellow-500");
-		else if (temp <= 35) setTempColor("text-orange-500");
+		if (temp.value <= 26) setTempColor("text-blue-500");
+		else if (temp.value <= 30) setTempColor("text-yellow-500");
+		else if (temp.value <= 35) setTempColor("text-orange-500");
 		else setTempColor("text-red-800");
 	}, [temp])
 
@@ -83,10 +98,10 @@ export default function Home() {
 					</div>
 					<div id="general"
 							 className={ `flex flex-col items-center justify-center gap-16 max-w-100 text-3xl ${ WinkySans_font.className }` }>
-						{suggestions.description}
+						{suggestions.desc1}
 						<br/>
 						<br/>
-						{suggestions.description}
+						{suggestions.desc2}
 					</div>
 				</div>
 
@@ -158,41 +173,41 @@ export default function Home() {
 					<div className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title`}>🌡️ Temperature</span>
 						<div className="flex flex-row items-end">
-							<span id="temperature" className={`${ WinkySans_font.className } ${tempColor} attribute-text`}>{ temp }</span>
+							<span id="temperature" className={`${ WinkySans_font.className } ${tempColor} attribute-text`}>{ temp.value }</span>
 							<span className={`${ WinkySans_font.className } ${tempColor} text-2xl xl:text-5xl mb-4`}>°C</span>
 						</div>
 					</div>
-					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Moderate Risk of heat stroke</span>
+					<span className={`${ WinkySans_font.className } attribute-desc mt-5`}>{ temp.desc }</span>
 				</div>
 
 				<div className="flex-width">
 					<div className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title`}>💦 Humidity</span>
 						<div className="flex flex-row items-end text-blue-500">
-							<span id="humidity" className={`${ WinkySans_font.className } attribute-text`}>{ humid }</span>
+							<span id="humidity" className={`${ WinkySans_font.className } attribute-text`}>{ humid.value }</span>
 							<span className={`${ WinkySans_font.className } text-2xl xl:text-6xl mb-4`}>%</span>
 						</div>
 					</div>
-					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Hard to cooldown</span>
+					<span className={`${ WinkySans_font.className } attribute-desc mt-5`}>{ humid.desc }</span>
 				</div>
 
 				<div className="flex-width">
 					<div className="attribute-box">
 						<span className={`${CaveatBrush_font.className} font-bold text-3xl 4xl:text-5xl`}>😶‍🌫 PM 2.5 (AQI)</span>
-						<span id="pm25" className={`${ WinkySans_font.className } attribute-text text-gray-500`}>{ pm25 }</span>
+						<span id="pm25" className={`${ WinkySans_font.className } attribute-text text-gray-500`}>{ pm25.value }</span>
 					</div>
-					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Perfectly fine to go out</span>
+					<span className={`${ WinkySans_font.className } attribute-desc mt-5`}>{ pm25.desc }</span>
 				</div>
 
 				<div className="flex-width">
 					<div id="people" className="attribute-box">
 						<span className={`${CaveatBrush_font.className} attribute-title`}>👨‍👨 People</span>
 						<div className="flex flex-row items-end">
-							<span id="people" className={`${ WinkySans_font.className } attribute-text`}>{ people }</span>
+							<span id="people" className={`${ WinkySans_font.className } attribute-text`}>{ people.value }</span>
 							<span className={`${ WinkySans_font.className } text-2xl xl:text-6xl mb-4`}>%</span>
 						</div>
 					</div>
-					<span className={`${ WinkySans_font.className } text-3xl 4xl:text-4xl mt-5`}>Barely anyone might come</span>
+					<span className={`${ WinkySans_font.className } attribute-desc mt-5`}>{ people.desc }</span>
 				</div>
 
 			</div>
