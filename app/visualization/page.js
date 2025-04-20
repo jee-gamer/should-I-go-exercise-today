@@ -59,25 +59,29 @@ export default function Visualization() {
 
 
 	useEffect(() => {
-		let format_time = ""
-		let format_weather = ""
-		if (time === "Late Afternoon") {
+		let format_time = time
+		let format_weather = weather
+		if (format_time === "Late Afternoon") {
 			format_time = "late-afternoon";
 		}
-		if (weather === "Precip_mm") {
+		if (format_weather === "Precip_mm") {
 			format_weather = "precip";
-		} else if (weather === "PM 2.5") {
+		} else if (format_weather === "PM 2.5") {
 			format_weather = "pm25";
 		}
 		format_weather = format_weather.toLowerCase();
 		const getData = async () => {
 			const [weatherRes, peopleRes] = await Promise.all([
-				axios.get(`/api/all-${format_weather}`, { params: { format_time } }),
-				axios.get('/api/all-people', { params: { format_time } })
+				axios.get(`/api/all-${format_weather}`, { params: {
+					time: format_time } }),
+				axios.get('/api/all-people', { params: {
+					time: format_time } })
 			]);
 
 			const people = peopleRes.data.result;
 			const metrics = weatherRes.data.result;
+			console.log(people)
+			console.log(metrics)
 
 			const combined = people.map((person, index) => ({
 				person,
