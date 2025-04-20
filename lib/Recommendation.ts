@@ -24,6 +24,28 @@ class Recommendation {
         return Recommendation.instance;
     }
 
+    private pm25ToAqi(pm25: number): number {
+        const breakpoints = [
+            { cLow: 0.0,   cHigh: 12.0,   aqiLow: 0,   aqiHigh: 50 },
+            { cLow: 12.1,  cHigh: 35.4,   aqiLow: 51,  aqiHigh: 100 },
+            { cLow: 35.5,  cHigh: 55.4,   aqiLow: 101, aqiHigh: 150 },
+            { cLow: 55.5,  cHigh: 150.4,  aqiLow: 151, aqiHigh: 200 },
+            { cLow: 150.5, cHigh: 250.4,  aqiLow: 201, aqiHigh: 300 },
+            { cLow: 250.5, cHigh: 500.4,  aqiLow: 301, aqiHigh: 500 },
+        ];
+
+        for (const bp of breakpoints) {
+            if (pm25 >= bp.cLow && pm25 <= bp.cHigh) {
+                const aqi = ((bp.aqiHigh - bp.aqiLow) / (bp.cHigh - bp.cLow)) * (pm25 - bp.cLow) + bp.aqiLow;
+                return Math.round(aqi);
+            }
+        }
+
+        // If it's over the max threshold
+        return 500;
+    }
+
+
     public async suggestion(
         time?: string,
         lat?: string,
@@ -51,10 +73,11 @@ class Recommendation {
         result.suggestion = "No";
         const linearRegression = await LinearRegression.getInstance();
         const peoplePredict = await linearRegression.predict(time, lat, lon)
+        const AQI = this.pm25ToAqi(data.pm2_5)
         result.weather = {
             temperature: {value: hourForecast.temp_c, desc: this.temperatureDesc(hourForecast.temp_c)},
             humidity: {value: hourForecast.humidity, desc: this.humidityDesc(hourForecast.humidity)},
-            pm2_5: {value: Math.round(data.pm2_5), desc: this.pm2_5Desc(data.pm2_5)},
+            pm2_5: {value: AQI, desc: this.pm2_5Desc(data.pm2_5)},
             people: {value: peoplePredict.percentage, desc: this.peopleDesc(peoplePredict.percentage)}
         }
         if (hourForecast.precip_mm >= 1) {
