@@ -25,6 +25,7 @@ class Recommendation {
     }
 
     private pm25ToAqi(pm25: number): number {
+        // AQI is always higher than pm25 so don't get confused if it's higher
         const breakpoints = [
             { cLow: 0.0,   cHigh: 12.0,   aqiLow: 0,   aqiHigh: 50 },
             { cLow: 12.1,  cHigh: 35.4,   aqiLow: 51,  aqiHigh: 100 },
