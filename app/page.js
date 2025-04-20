@@ -208,6 +208,7 @@ export default function Home() {
 						</div>
 					</div>
 					<span className={`${ WinkySans_font.className } attribute-desc mt-5`}>{ people.desc }</span>
+					<span className={`${ WinkySans_font.className } text-1xl 4xl:text-2xl mt-5 text-gray-500`}>* This is only a prediction</span>
 				</div>
 
 			</div>
