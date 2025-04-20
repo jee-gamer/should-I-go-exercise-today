@@ -12,6 +12,8 @@ export default function Visualization() {
 	let [time, setTime] = useState("Dawn");
 	let [weather, setWeather] = useState("Temperature");
 	let [customGraph, setCustomGraph] = useState({});
+	let [maxGraph, setMaxGraph] = useState([]);
+	let [avgGraph, setAvgGraph] = useState([]);
 
 	useEffect(() => {
 		console.log(`Changed time to ${time}`)
@@ -101,6 +103,16 @@ export default function Visualization() {
 		getData();
 	}, [time, weather]);
 
+	useEffect(() => {
+		const getData = async () => {
+			const maxRes = await axios.get("/api/all-max-people")
+			const avgRes = await axios.get("/api/all-average-people")
+			setMaxGraph(maxRes.data);
+			setAvgGraph(avgRes.data);
+		};
+		getData();
+	}, [])
+
 	return (
 		<div className="flex flex-col items-center justify-items-center min-h-fit h-screen sm:p-20 font-[family-name:var(--font-geist-sans)] text-black notebook-wo-line">
 			<div id="main" className="flex flex-col items-center justify-items-start min-w-full min-h-screen">
@@ -188,7 +200,7 @@ export default function Visualization() {
 					<div className="flex flex-col items-center w-1/2 h-full">
 						<BarChart
 							xData={['Dawn', 'Morning', 'Noon', 'Afternoon', 'Late Afternoon']}
-							yData={[12, 19, 3, 5, 8]}
+							yData={avgGraph}
 							xLabel="Time"
 							yLabel="People"
 							title="Average people"
@@ -197,7 +209,7 @@ export default function Visualization() {
 					<div className="flex flex-col items-center w-1/2 h-full">
 						<BarChart
 							xData={['Dawn', 'Morning', 'Noon', 'Afternoon', 'Late Afternoon']}
-							yData={[12, 19, 3, 5, 8]}
+							yData={maxGraph}
 							xLabel="Time"
 							yLabel="People"
 							title="Max people"
