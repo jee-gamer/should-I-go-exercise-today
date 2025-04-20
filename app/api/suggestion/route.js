@@ -12,6 +12,7 @@ export async function GET(req) {
     suggestion: string,
     desc1: string,
     desc2: string,
+    remark: "rain" | "verHot" | "cold" | "hot" | "humid" | "dry" | "good" | "bad"
     weather: {
       temperature: {value: number, desc: string},
       humidity: {value: number, desc: string},

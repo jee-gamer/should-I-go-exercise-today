@@ -55,6 +55,7 @@ class Recommendation {
         suggestion: string,
         desc1: string,
         desc2: string,
+        remark: string
         weather: Weather | null
     }> {
         time = time?.toLowerCase();
@@ -62,6 +63,7 @@ class Recommendation {
             suggestion: "unavailable",
             desc1: "unavailable",
             desc2: "unavailable",
+            remark: "unavailable",
             weather: null
         }
         if (!time || time == "now") {
@@ -85,34 +87,40 @@ class Recommendation {
         if (hourForecast.precip_mm >= 1) {
             result.desc1 = "There's significant rain, which can make outdoor conditions unpleasant, slippery, or even unsafe.";
             result.desc2 = "Consider postponing your plans or switching to indoor activities.";
+            result.remark = "rain";
             return result;
         }
         if (hourForecast.temp_c > 34) {
             result.desc1 = "It's too hot outside, you will get dehydrated easily.";
             result.desc2 = "Being outside in such heat can increase the risk of heat exhaustion or dehydration, especially during midday hours.";
+            result.remark = "verHot";
             return result;
         }
         if (hourForecast.temp_c < 10) {
             result.desc1 = "It's cold outside, you might be frozen if you go outdoor.";
             result.desc2 = "Low temperatures can lead to discomfort, especially if you're not dressed warmly enough, and prolonged exposure may be harmful.";
+            result.remark = "cold";
             return result;
         }
         if (29 <= hourForecast.temp_c && hourForecast.temp_c <= 34) {
             result.desc1 = "It's a little hot outside, stay hydrated and avoid exposing to direct sunlight.";
             result.desc2 = "It’s manageable, but you should wear light clothing, use sunscreen, and avoid demanding activities during peak sun hours.";
             result.suggestion = "Maybe";
+            result.remark = "hot";
             return result;
         }
         if (hourForecast.humidity > 70) {
             result.desc1 = "The air is very humid, which can make the temperature feel hotter than it actually is and cause fatigue faster.";
             result.desc2 = "Wear breathable clothing and stay hydrated if you go out.";
             result.suggestion = "Maybe";
+            result.remark = "humid";
             return result;
         }
         if (hourForecast.humidity < 25) {
             result.desc1 = "The air is very dry, stay hydrated.";
             result.desc2 = "This can irritate your skin, eyes, and throat, especially if you have allergies or respiratory sensitivities.";
             result.suggestion = "Maybe";
+            result.remark = "dry";
             return result;
         }
         if (10 <= hourForecast.temp_c &&
@@ -123,11 +131,13 @@ class Recommendation {
             result.desc1 = "Perfect for walking, exercising, or socializing outdoors.";
             result.desc2 = "Great Time to Go Outside. The weather is comfortable with mild temperatures, moderate humidity, and little to no precipitation.";
             result.suggestion = "Yes";
+            result.remark = "good";
             return result;
         }
         result.desc1 = "Weather is okay but not ideal.";
         result.desc2 = "You can go outside, but consider your personal comfort and bring appropriate gear if needed (e.g., jacket, water, umbrella).";
         result.suggestion = "Maybe";
+        result.remark = "bad";
         return result;
     }
 
