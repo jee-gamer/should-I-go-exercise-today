@@ -57,6 +57,7 @@ class Recommendation {
         desc2: string,
         weather: Weather | null
     }> {
+        time = time?.toLowerCase();
         let result = {
             suggestion: "unavailable",
             desc1: "unavailable",

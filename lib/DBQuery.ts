@@ -44,7 +44,7 @@ class DBQuery {
         error_message?: string
     }> {
         let q = `SELECT ${field}, timestamp FROM yearProject`;
-        time = time.toLowerCase();
+        time = time?.toLowerCase();
         if (INTERVAL[time]) {
             q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
         }
@@ -70,7 +70,7 @@ class DBQuery {
             fieldString = fields.join(", ") + ", timestamp";
         }
         let q = `SELECT ${fieldString} FROM yearProject`
-        time = time.toLowerCase();
+        time = time?.toLowerCase();
         if (INTERVAL[time]) {
             q += ` WHERE TIME(timestamp) BETWEEN '${INTERVAL[time].first}' AND '${INTERVAL[time].last}'`
         }
