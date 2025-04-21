@@ -93,7 +93,7 @@ class Recommendation {
         if (hourForecast.temp_c > 34) {
             result.desc1 = "It's too hot outside, you will get dehydrated easily.";
             result.desc2 = "Being outside in such heat can increase the risk of heat exhaustion or dehydration, especially during midday hours.";
-            result.remark = "verHot";
+            result.remark = "veryHot";
             return result;
         }
         if (hourForecast.temp_c < 10) {
