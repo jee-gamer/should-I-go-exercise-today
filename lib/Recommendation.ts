@@ -69,9 +69,6 @@ class Recommendation {
         if (!time || time == "now") {
             time = DBQuery.mapInterval();
         }
-        if (!INTERVAL[time]) {
-            return result;
-        }
         const data = await WeatherAPI.fetchData(time, lat, lon);
         const hourForecast = data.weather;
         result.suggestion = "No";

@@ -24,13 +24,11 @@ class WeatherAPI {
         ) {
         const now = new Date(new Date().toLocaleString('en-US', {timeZone: 'Asia/Bangkok'}));
         let hour: number;
-        time = time.toLowerCase()
+        time = time?.toLowerCase()
         if (!time) {
             hour = now.getHours();
-        } else if (INTERVAL[time]) {
+        } else {
             hour = INTERVAL[time].rep;
-        } if (hour > 17 || hour < 7) {
-            return null;
         } if (!lat) {
             lat = 13.833.toString();
         } if (!lon) {
