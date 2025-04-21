@@ -21,7 +21,7 @@ export default function Api() {
                 <div className="api-box">
                     <span className="text-3xl w-1/3 align-text-top">Suggestion at [time]</span>
                     <span className="text-3xl w-1/3 align-text-top">/suggestion</span>
-                    <span className="text-3xl w-1/3">Return the suggestion whether you should go exercise at the time interval. Will return json {"{suggestion, description}"}</span>
+                    <span className="text-3xl w-1/3">Return the suggestion whether you should go exercise at the time interval.</span>
                 </div>
                 <div className="api-box">
                     <span className="text-3xl w-1/3 align-text-top">People prediction at [time]</span>
