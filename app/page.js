@@ -10,12 +10,14 @@ import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-	const [temp, setTemp] = useState({value: 0, desc: "Not loaded"}); // temp here
+	const [temp, setTemp] = useState({value: 0, desc: "Not loaded"});
 	const [tempColor, setTempColor] = useState("");
-	const [humid, setHumid] = useState({value: 0, desc: "Not loaded"}); // temp here
-	const [pm25, setPm25] = useState({value: 0, desc: "Not loaded"}); // temp here
-	const [people, setPeople] = useState({value: 0, desc: "Not loaded"}); // temp here
-	const [suggestions, setSuggestions] = useState({suggestion: "hmm?", desc1: "Whoops. It seems like the suggestion isn't loaded yet", desc2: "Nothing to see here"});
+	const [humid, setHumid] = useState({value: 0, desc: "Not loaded"});
+	const [pm25, setPm25] = useState({value: 0, desc: "Not loaded"});
+	const [people, setPeople] = useState({value: 0, desc: "Not loaded"});
+	const [remark, setRemark] = useState("bad");
+	const [picture, setPicture] = useState("/bad/sad.png");
+	const [suggestions, setSuggestions] = useState({suggestion: "hmm?", desc1: "Whoops. It seems like the suggestion isn't loaded yet", desc2: "Try refreshing the page"});
 	let [time, setTime] = useState("now");
 
 	useEffect(() => {
@@ -28,7 +30,7 @@ export default function Home() {
 			})
 				.then((response) => {
 					console.log(response.data);
-					const { suggestion, desc1, desc2, weather } = response.data;
+					const { suggestion, desc1, desc2, remark, weather } = response.data;
 					setSuggestions({
 						suggestion: suggestion,
 						desc1: desc1,
@@ -39,6 +41,8 @@ export default function Home() {
 					setHumid(weather.humidity);
 					setPm25(weather.pm2_5);
 					setPeople(weather.people);
+
+					setRemark(remark);
 			})
 		}
 
@@ -59,8 +63,15 @@ export default function Home() {
 	}, [temp])
 
 	useEffect(() => {
-		// To change to prediction when set new time
-	}, [time])
+		const get_and_set_image = async () => {
+			const picturePath = await axios.get(`/api/random-image`, {
+				params: {folderName: remark}
+			})
+			console.log(picturePath.data.picturePath)
+			setPicture(picturePath.data.picturePath);
+		}
+		get_and_set_image();
+	}, [remark])
 
   return (
     <div className="relative flex flex-col items-center justify-items-center min-h-fit w-full max-w-screen sm:p-20 font-[family-name:var(--font-geist-sans)] notebook overflow-x-hidden z-0 text-black">
@@ -114,11 +125,11 @@ export default function Home() {
 						alt="Picture of the author"
 					/>
 					<Image
-						src="/flowerTest.png"
-						width={ 500 }
-						height={ 500 }
+						src={picture}
+						width={ 350 }
+						height={ 350 }
 						alt="Stickman"
-						className="absolute top-18 left-13"
+						className="absolute top-40 left-30"
 					/>
 				</div>
 
