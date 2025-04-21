@@ -27,6 +27,8 @@ class WeatherAPI {
         time = time?.toLowerCase()
         if (!time) {
             hour = now.getHours();
+        } else {
+            hour = INTERVAL[time].rep;
         } if (!lat) {
             lat = 13.833.toString();
         } if (!lon) {
