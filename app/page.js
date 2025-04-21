@@ -8,6 +8,7 @@ import axios from "axios";
 import { CaveatBrush_font, PM_font, WinkySans_font } from "@/app/Fonts";
 
 import { useEffect, useState } from "react";
+import useGeolocation from "@/hook/location";
 
 export default function Home() {
 	const [temp, setTemp] = useState({value: 0, desc: "Not loaded"});
@@ -19,6 +20,17 @@ export default function Home() {
 	const [picture, setPicture] = useState("/bad/sad.png");
 	const [suggestions, setSuggestions] = useState({suggestion: "hmm?", desc1: "Whoops. It seems like the suggestion isn't loaded yet", desc2: "Try refreshing the page"});
 	let [time, setTime] = useState("now");
+	const { location, error } = useGeolocation();
+
+	useEffect(() => {
+		if (location) {
+			console.log('User location:', location);
+			// You can send it to your backend here
+		}
+		if (error) {
+			console.log('Geolocation error:', error);
+		}
+	}, [location, error]);
 
 	useEffect(() => {
 		if (time === "Late Afternoon") {
@@ -26,7 +38,7 @@ export default function Home() {
 		}
 		const get_suggestion = async () => {
 			await axios.get(`/api/suggestion`, {
-				params: {time: time},
+				params: {time: time, lat: location?.lat, lon: location?.lon},
 			})
 				.then((response) => {
 					console.log(response.data);
