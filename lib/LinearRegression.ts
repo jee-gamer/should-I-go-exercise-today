@@ -1,6 +1,7 @@
 import MultivariateLinearRegression from 'ml-regression-multivariate-linear'
 import DBQuery from "@/lib/DBQuery";
 import WeatherAPI from "@/lib/WeatherAPI";
+import {INTERVAL} from "@/lib/INTERVAL";
 
 
 class LinearRegression {
@@ -35,8 +36,8 @@ class LinearRegression {
         // call API to get all the weather data
         // predict(Argument Must be same format as X)
         const data = (await WeatherAPI.fetchData(time, lat, lon)).weather;
-        if (!data || data.error) {
-            return {prediction: null, percentage: null};
+        if (!data || data.error || !INTERVAL[time]) {
+            return {prediction: 0, percentage: 0};
         }
         const prediction: number = this.regressionModel.predict([data.temp_c, data.humidity])[0];
         const percentage: number = prediction / this.maxPeople;
