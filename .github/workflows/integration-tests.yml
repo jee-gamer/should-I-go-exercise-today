@@ -22,16 +22,11 @@ jobs:
         env:
           NODE_ENV: development
 
-      - name: Wait for frontend to be ready
-        run: |
-          for i in {1..30}; do
-            if curl -s http://localhost:3000 > /dev/null; then
-              echo "Frontend is up!"
-              break
-            fi
-            echo "Waiting for frontend to start..."
-            sleep 1
-          done  
+      - name: Install wait-on
+        run: npm install -g wait-on
+      
+      - name: Wait until frontend returns correct content
+        run: wait-on http://localhost:3000 --timeout 30000
           
       - name: Set up Python
         uses: actions/setup-python@v4
