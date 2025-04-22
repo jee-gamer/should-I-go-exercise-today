@@ -33,10 +33,6 @@ class SeleniumTest(unittest.TestCase):
         description = driver.find_element(by=By.ID,
                                           value='general').text.lower()
 
-        print("🔥 PAGE SOURCE START 🔥")
-        print(driver.page_source)
-        print("🔥 PAGE SOURCE END 🔥")
-
         self.assertTrue(len(description) > 10)
 
         time.sleep(12)
@@ -120,7 +116,7 @@ class APITest(unittest.TestCase):
 
     def test_people_now(self):
         response = requests.get(f"{self.baseURL}/api/people-now")
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, [200, 204])  # 204 if it's outside of time range
         data = response.json()
         people = data['prediction']
         self.assertIsInstance(people, int)
