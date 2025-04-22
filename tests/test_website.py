@@ -33,6 +33,10 @@ class SeleniumTest(unittest.TestCase):
         driver = self.driver
         time.sleep(8)
         WebDriverWait(driver, 10).until(
+            lambda d: d.execute_script(
+                'return document.readyState') == 'complete'
+        )
+        WebDriverWait(driver, 10).until(
             lambda d: d.find_element(By.ID,
                                      "yesno").text != "hmm?"
         )
