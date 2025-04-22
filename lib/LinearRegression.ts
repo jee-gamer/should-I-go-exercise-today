@@ -35,6 +35,9 @@ class LinearRegression {
     async predict(time?: string, lat?: string, lon?: string): Promise<{prediction: number, percentage: number}> {
         // call API to get all the weather data
         // predict(Argument Must be same format as X)
+        if (!time || time == "now") {
+            time = DBQuery.mapInterval();
+        }
         const data = (await WeatherAPI.fetchData(time, lat, lon)).weather;
         if (!data || data.error || !INTERVAL[time]) {
             return {prediction: 0, percentage: 0};
