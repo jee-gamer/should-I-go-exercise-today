@@ -33,6 +33,10 @@ class SeleniumTest(unittest.TestCase):
         description = driver.find_element(by=By.ID,
                                           value='general').text.lower()
 
+        print("🔥 PAGE SOURCE START 🔥")
+        print(driver.page_source)
+        print("🔥 PAGE SOURCE END 🔥")
+
         self.assertTrue(len(description) > 10)
 
         time.sleep(12)
