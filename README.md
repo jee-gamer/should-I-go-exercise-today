@@ -88,7 +88,7 @@ requests
 ```
 ---
 
-### 4. **Upload the data to your Database in phpMyAdmin
+### 4. **Upload the data to your Database in phpMyAdmin**
 
 ```txt
 data/yearProject.csv
