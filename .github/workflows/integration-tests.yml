@@ -17,14 +17,6 @@ jobs:
       - name: Install frontend dependencies
         run: npm install
 
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-      
-      - name: Install ChromeDriver
-        uses: nanasess/setup-chromedriver@v2
-
       - name: Start frontend server
         run: npm run dev &
         env:
