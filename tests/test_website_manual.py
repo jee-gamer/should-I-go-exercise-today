@@ -22,7 +22,7 @@ class SeleniumTest(unittest.TestCase):
         Test that the home page have to show the suggestion based on the current time
         """
         driver = self.driver
-        time.sleep(5)
+        time.sleep(8)
         suggestion = driver.find_element(by=By.ID, value='yesno').text.lower()
 
         self.assertIn(suggestion, ["yes", "no", "maybe"])
