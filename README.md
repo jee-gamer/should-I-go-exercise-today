@@ -118,7 +118,8 @@ This application requires a MySQL-compatible database table with the following s
 
 This project includes a basic prediction model that estimates the number of people based on weather conditions such as temperature, humidity, precipitation, and PM2.5 levels. While the model may not provide highly accurate results due to data limitations, it offers a useful approximation to support decision-making.
 
-The model is trained using python sklearn library in **Google Colab**
+The data is visualized using python sklearn library in **Google Colab**
+The model is trained by the library "ml-regression-multivariate-linear" in javascript.
 
-[EDA and Model](https://colab.research.google.com/drive/1QH3cfshCUESUoD8XnBOln-4Af9MValTy?usp=sharing)
+[EDA](https://colab.research.google.com/drive/1QH3cfshCUESUoD8XnBOln-4Af9MValTy?usp=sharing)
 
