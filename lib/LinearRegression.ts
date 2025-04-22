@@ -28,6 +28,7 @@ class LinearRegression {
                 const maxPeople = (await DBQuery.getAggregate(["people"], "max"))["people"];
                 LinearRegression.instance = new LinearRegression(X, Y, maxPeople);
             }
+            console.log(data["error_message"])
         }
         return LinearRegression.instance;
     }

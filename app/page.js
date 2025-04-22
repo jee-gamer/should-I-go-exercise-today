@@ -61,13 +61,21 @@ export default function Home() {
 
 					setRemark(remark);
 			})
+			.catch((error) => {
+				console.error('Error fetching suggestions:', error);
 
-			await axios.get(`/api/heatstroke-risk`, {
-				params: {time: time, lat: myLocation.lat, lon: myLocation.lon},
-			})
-				.then((response) => {
-					setHeatstroke(response.data.level);
-				})
+				// You can handle different error scenarios if needed:
+				if (error.response) {
+					// Server responded with a status code outside 2xx
+					console.error('Response error:', error.response.data);
+				} else if (error.request) {
+					// Request was made but no response received
+					console.error('No response received:', error.request);
+				} else {
+					// Something else happened
+					console.error('Error:', error.message);
+				}
+			});
 		}
 
 		try {
