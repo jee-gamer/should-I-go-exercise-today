@@ -30,9 +30,9 @@ class WeatherAPI {
         } else {
             hour = INTERVAL[time].rep;
         } if (!lat) {
-            lat = 13.833.toString();
+            lat = 13.847.toString();
         } if (!lon) {
-            lon = 100.483.toString();
+            lon = 100.568.toString();
         }
         const url = `${this.baseURL}?key=${this.key}&q=${lat},${lon}&aqi=yes&hour=${hour}`
         let res: Response;

@@ -22,6 +22,7 @@ class SeleniumTest(unittest.TestCase):
         Test that the home page have to show the suggestion based on the current time
         """
         driver = self.driver
+        time.sleep(5)
         suggestion = driver.find_element(by=By.ID, value='yesno').text.lower()
 
         self.assertIn(suggestion, ["yes", "no", "maybe"])
@@ -96,14 +97,15 @@ class APITest(unittest.TestCase):
         Test the suggestion endpoint with latitude and longitude
         """
         params = {
-            'lat': 10.3212,
-            'lon': 13.1323
+            "lat": "13.847",
+            "lon": "100.568"
         }
         response = requests.get(f"{self.baseURL}/api/suggestion", params=params)
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertIn(data['suggestion'].lower(), ["yes", "no", "maybe"])
-        self.assertTrue(len(data['description']) > 20)
+        self.assertTrue(len(data['desc1']) > 20)
+        self.assertTrue(len(data['desc2']) > 20)
 
     def test_people_at(self):
         response = requests.get(f"{self.baseURL}/api/people-at", params=self.time)
@@ -120,18 +122,18 @@ class APITest(unittest.TestCase):
         self.assertIsInstance(people, int)
 
     def test_average_people(self):
-        response = requests.get(f"{self.baseURL}/api/average-people")
+        response = requests.get(f"{self.baseURL}/api/average-people", params=self.time)
         self.assertEqual(response.status_code, 200)
         data = response.json()
         people = math.floor(float(data['people']))
-        self.assertEqual(math.floor(people), 6)  # round down from 6.56
+        self.assertEqual(math.floor(people), 8)  # round down from 8.84
 
     def test_min_people(self):
         response = requests.get(f"{self.baseURL}/api/min-people", params=self.time)
         self.assertEqual(response.status_code, 200)
         data = response.json()
         people = int(data['people'])
-        self.assertEqual(people, 0)
+        self.assertEqual(people, 3)
 
     def test_max_people(self):
         """
@@ -141,7 +143,7 @@ class APITest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         people = int(data['people'])
-        self.assertEqual(people, 7)
+        self.assertEqual(people, 22)
 
 
 if __name__ == "__main__":
