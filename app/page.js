@@ -76,6 +76,13 @@ export default function Home() {
 					console.error('Error:', error.message);
 				}
 			});
+
+			await axios.get(`/api/heatstroke-risk`, {
+				params: {time: time, lat: myLocation.lat, lon: myLocation.lon},
+			})
+				.then((response) => {
+					setHeatstroke(response.data.level);
+				})
 		}
 
 		try {
