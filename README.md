@@ -4,7 +4,7 @@
 1. Jiramate Kedmake 6610545201 
 2. Yutivich Tun-ueng 6610545910
 
-We are currently studying in Kasetsart Univeristy Bang Khen Campus
+We are currently studying at Kasetsart University Bang Khen Campus
 
 Faculty: Engineering
 
@@ -88,14 +88,22 @@ requests
 ```
 ---
 
-### 4. **Create .env.local file**
+### 4. **Upload the data to your Database in phpMyAdmin
+
+```txt
+data/yearProject.csv
+```
+
+In your database (b66......) -> name the table "yearProject" (or name it something else and change the code if you know what you're doing)
+
+### 5. **Create .env.local file**
 
 ```txt
 Find the example from example.env from root directory
 ```
 ---
 
-### 5. **Start the development server**
+### 6. **Start the development server**
 
 ```bash
 npm run dev
@@ -109,7 +117,7 @@ http://localhost:3000
 
 ---
 
-### 6. **Run the tests**
+### 7. **Run the tests**
 
 In a separate terminal (while the dev server is running):
 
@@ -118,12 +126,13 @@ cd tests
 pytest test_website_manual.py
 ```
 
+Since there is a problem with phpMyAdmin Database max user connection some api test might fail. It will resolve itself after a while (>1 hour)
 ---
 
 ## ✅ Notes
 
 - Make sure the dev server is **already running** before running Selenium or `requests` tests.
-- You have to connect to your own database and use your own data.
+- You have to connect to your own database with the data we provided in "data" folder (or you can use your own data if you have one)
 ---
 
 ## 💼 Database Schema Requirements
