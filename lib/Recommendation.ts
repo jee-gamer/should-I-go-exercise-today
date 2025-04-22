@@ -228,5 +228,4 @@ class Recommendation {
     }
 }
 
-
-export default Recommendation.getInstance();
+export default Recommendation;

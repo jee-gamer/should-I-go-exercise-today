@@ -8,6 +8,13 @@ from selenium.webdriver.chrome.options import Options
 import time
 import math
 
+# HEADLESS stuff
+options = Options()
+options.add_argument("--headless")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+
+
 class SeleniumTest(unittest.TestCase):
 
     def setUp(self):
@@ -116,7 +123,7 @@ class APITest(unittest.TestCase):
 
     def test_people_now(self):
         response = requests.get(f"{self.baseURL}/api/people-now")
-        self.assertEqual(response.status_code, [200, 204])  # 204 if it's outside of time range
+        self.assertEqual(response.status_code, 200)  # 503 if it's outside of time range
         data = response.json()
         people = data['prediction']
         self.assertIsInstance(people, int)

@@ -14,7 +14,7 @@ export async function GET(req) {
   const linearRegression = await LinearRegression.getInstance()
   const data = await linearRegression.predict(null, lat, lon);
   return new Response(JSON.stringify(data), {
-    status: data.prediction? 200 : 204,
+    status: 200,
     headers: { 'Content-Type': 'application/json' },
   })
 }

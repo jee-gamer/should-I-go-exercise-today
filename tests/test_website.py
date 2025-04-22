@@ -1,10 +1,8 @@
 import unittest
 import requests
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import time
@@ -32,14 +30,6 @@ class SeleniumTest(unittest.TestCase):
         """
         driver = self.driver
         time.sleep(8)
-        WebDriverWait(driver, 10).until(
-            lambda d: d.execute_script(
-                'return document.readyState') == 'complete'
-        )
-        WebDriverWait(driver, 10).until(
-            lambda d: d.find_element(By.ID,
-                                     "yesno").text != "hmm?"
-        )
         suggestion = driver.find_element(by=By.ID, value='yesno').text.lower()
 
         self.assertIn(suggestion, ["yes", "no", "maybe"])
@@ -49,10 +39,6 @@ class SeleniumTest(unittest.TestCase):
 
         description = driver.find_element(by=By.ID,
                                           value='general').text.lower()
-
-        print("🔥 PAGE SOURCE START 🔥")
-        print(driver.page_source)
-        print("🔥 PAGE SOURCE END 🔥")
 
         self.assertTrue(len(description) > 10)
 
@@ -137,7 +123,7 @@ class APITest(unittest.TestCase):
 
     def test_people_now(self):
         response = requests.get(f"{self.baseURL}/api/people-now")
-        self.assertEqual(response.status_code, [200, 204])  # 204 if it's outside of time range
+        self.assertEqual(response.status_code, 200)  # 503 if it's outside of time range
         data = response.json()
         people = data['prediction']
         self.assertIsInstance(people, int)
@@ -169,7 +155,4 @@ class APITest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
-
 

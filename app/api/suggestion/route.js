@@ -1,4 +1,4 @@
-import recommendation from "@/lib/Recommendation";
+import Recommendation from "@/lib/Recommendation";
 
 export async function GET(req) {
   `
@@ -25,6 +25,7 @@ export async function GET(req) {
   let time = searchParam.get("time");
   let lat = searchParam.get("lat");
   let lon = searchParam.get("lon");
+  const recommendation = Recommendation.getInstance()
   const data = await recommendation.suggestion(time, lat, lon)
   return new Response(JSON.stringify(data), {
     status: data.suggestion === "unavailable" ? 503 : 200,

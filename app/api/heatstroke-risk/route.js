@@ -17,7 +17,8 @@ export async function GET(req) {
   const time = searchParam.get("time");
   const lat = searchParam.get("lat");
   const lon = searchParam.get("lat");
-  const data = await Recommendation.heatstroke(time, lat, lon);
+  const recommendation = Recommendation.getInstance()
+  const data = await recommendation.heatstroke(time, lat, lon);
   return new Response(JSON.stringify(data), {
     status: data.level === "unavailable" ? 503 : 200,
     headers: { 'Content-Type': 'application/json' },
