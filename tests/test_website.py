@@ -3,6 +3,8 @@ import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import time
@@ -30,6 +32,10 @@ class SeleniumTest(unittest.TestCase):
         """
         driver = self.driver
         time.sleep(8)
+        WebDriverWait(driver, 10).until(
+            lambda d: d.find_element(By.ID,
+                                     "yesno").text != "hmm?"
+        )
         suggestion = driver.find_element(by=By.ID, value='yesno').text.lower()
 
         self.assertIn(suggestion, ["yes", "no", "maybe"])
