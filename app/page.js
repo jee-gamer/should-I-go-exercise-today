@@ -21,11 +21,16 @@ export default function Home() {
 	const [suggestions, setSuggestions] = useState({suggestion: "hmm?", desc1: "Whoops. It seems like the suggestion isn't loaded yet", desc2: "Try refreshing the page"});
 	let [time, setTime] = useState("now");
 	const { location, error } = useGeolocation();
+	const [heatstroke, setHeatstroke] = useState("Not loaded");
+	const [myLocation, setMyLocation] = useState({lat: 13.847, lon: 100.568});
 
 	useEffect(() => {
 		if (location) {
 			console.log('User location:', location);
-			// You can send it to your backend here
+			setMyLocation({
+				lat: location.lat,
+				lon: location.lon,
+			});
 		}
 		if (error) {
 			console.log('Geolocation error:', error);
@@ -38,7 +43,7 @@ export default function Home() {
 		}
 		const get_suggestion = async () => {
 			await axios.get(`/api/suggestion`, {
-				params: {time: time, lat: location?.lat, lon: location?.lon},
+				params: {time: time, lat: myLocation.lat, lon: myLocation.lon},
 			})
 				.then((response) => {
 					console.log(response.data);
@@ -56,6 +61,13 @@ export default function Home() {
 
 					setRemark(remark);
 			})
+
+			await axios.get(`/api/heatstroke-risk`, {
+				params: {time: time, lat: myLocation.lat, lon: myLocation.lon},
+			})
+				.then((response) => {
+					setHeatstroke(response.data.level);
+				})
 		}
 
 		try {
@@ -65,7 +77,7 @@ export default function Home() {
 		}
 
 		// Add getting weather attribute and setting them here
-	}, [time]);
+	}, [time, myLocation]);
 
 	useEffect(() => {
 		if (temp.value <= 26) setTempColor("text-blue-500");
@@ -125,6 +137,10 @@ export default function Home() {
 						<br/>
 						<br/>
 						{suggestions.desc2}
+						<div className="flex flex-row">
+							<span className="text-red-800">Heatstroke risk:&nbsp;</span>
+							 {heatstroke}
+						</div>
 					</div>
 				</div>
 
@@ -220,6 +236,7 @@ export default function Home() {
 						<span id="pm25" className={`${ WinkySans_font.className } attribute-text text-gray-500`}>{ pm25.value }</span>
 					</div>
 					<span className={`${ WinkySans_font.className } attribute-desc mt-5`}>{ pm25.desc }</span>
+					<span className={`${ WinkySans_font.className } text-1xl 4xl:text-2xl mt-5 text-gray-500`}>* For current time only</span>
 				</div>
 
 				<div className="flex-width">
