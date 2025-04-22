@@ -1,7 +1,37 @@
+## Should I go exercise today
+
+## Team members
+1. Jiramate Kedmake 6610545201 
+2. Yutivich Tun-ueng 6610545910
+
+We are currently studying in Kasetsart Univeristy Bang Khen Campus
+
+Faculty: Engineering
+
+Department: Software And Knowledge Engineering (SKE)
+
+
 ## Project Overview
 This project aims to help people decide whether or not they should go outside
 to exercise based on the conditions like weather and the percentage of people who might go.
 This will also show the relationship between the percentage of people going to exercise and the weather.
+
+## 🚀 Features
+
+- ✅ **Personalized Suggestions**  
+  Get a simple yes/no recommendation like:
+
+  > *“Yes. The weather is perfect today.”*
+
+- 📊 **History Exercise Stats**  
+  View max, min, and average numbers of people exercising throughout the whole month of data collection.
+
+- 🔮 **Predictions**  
+  Estimate how many people will exercise at future time intervals (or right now) using predictive models.
+
+- 🧠 **Heatstroke Risk Score**  
+  Get data representing the current environmental risk for heat-related illness.
+
 
 ## Api to be provided to users
 
