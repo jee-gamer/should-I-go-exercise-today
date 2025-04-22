@@ -84,7 +84,8 @@ http://localhost:3000
 In a separate terminal (while the dev server is running):
 
 ```bash
-python -m unittest discover tests
+cd tests
+pytest test_website_manual.py
 ```
 
 ---
